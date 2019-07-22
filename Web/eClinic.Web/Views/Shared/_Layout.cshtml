@@ -1,60 +1,109 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@this.ViewData["Title"] - eClinic</title>
+﻿<!doctype html>
+<html lang="en">
 
-    <environment names="Development">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
-    <environment names="Staging,Production">
-        <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
-        <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
-    </environment>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>eClinic | @ViewData["Title"]</title>
+
+    <link rel="shortcut icon" href="assets/images/fav.jpg">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/fontawsom-all.min.css">
+    <link rel="stylesheet" href="~/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css" />
+    <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
+
 <body>
+
+    <!-- ################# Header Starts Here####################### -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="header-top">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">eClinic</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 left-item">
+                        <ul>
+                            <li><i class="fas fa-envelope-square"></i> sales@smarteyeapps.com</li>
+                            <li><i class="fas fa-phone-square"></i> +123 987 887 765</li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block right-item">
+                        <ul>
+                            <li><a><i class="fab fa-github"></i></a></li>
+                            <li><a><i class="fab fa-google-plus-g"></i></a></li>
+                            <li> <a><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a><i class="fab fa-twitter"></i></a></li>
+                            <li> <a><i class="fab fa-facebook-f"></i></a></li>
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="nav-head" class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 no-padding col-sm-12 nav-img">
+                        <img src="~/assets/images/logo.jpg" alt="">
+                        <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-md-none small-menu fa-bars"></i></a>
+                    </div>
+                    <div id="menu" class="col-lg-8 col-md-9 d-none d-md-block nav-item">
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+                            <li><a asp-controller="Home" asp-action="Services">Services</a></li>
+                            <li><a asp-controller="News" asp-action="AllNews">News</a></li>
+                            <li><a asp-controller="Gallery" asp-action="All">Gallery</a></li>
+                            <li><a asp-controller="Home" asp-action="Contacts">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 d-none d-lg-block appoint">
+                        <a class="btn btn-info" asp-controller="Appointment" asp-action="ShowMonth">Book an Appointment</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </header>
+    @*<div class="container">
+
+            <div class="page-nav no-margin row">
+                <div class="container">
+                    <div class="row">
+                        <h2>About Dil Homeopathy Clinic</h2>
+                        <partial name="_CookieConsentPartial" />
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    
+            <div class="blog-row row">
+
+                <main role="main" class="pb-3">
+
+                </main>
+            </div>
+        </div>*@
+
+    @this.RenderBody()
+
+<footer class="footer">
     <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @this.RenderBody()
-        </main>
+       &copy; eClinic 2019
+        
     </div>
-    
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - eClinic - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+
+
+</footer>
 
     <environment names="Development">
+        <!--<script src="assets/js/jquery-3.2.1.min.js"></script>-->
+        <script src="~/assets/js/popper.min.js"></script>
+        <!--<script src="assets/js/bootstrap.min.js"></script>-->
+        <script src="~/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+        <script src="~/assets/js/script.js"></script>
+
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
@@ -62,6 +111,12 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
+        <!--<script src="assets/js/jquery-3.2.1.min.js"></script>-->
+        <script src="~/assets/js/popper.min.js"></script>
+        <!--<script src="assets/js/bootstrap.min.js"></script>-->
+        <script src="~/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+        <script src="~/assets/js/script.js"></script>
+
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
         <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
@@ -71,4 +126,4 @@
 
     @this.RenderSection("Scripts", required: false)
 </body>
-</html>
+    </html>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
@@ -21,6 +21,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\eClinic.Data.Common\eClinic.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\eClinic.Data.Models\eClinic.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\eClinic.Data\eClinic.Data.csproj" />
+    <ProjectReference Include="..\..\Web\eClinic.Web.ViewModels\eClinic.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\eClinic.Services.Mapping\eClinic.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

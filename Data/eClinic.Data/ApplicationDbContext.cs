@@ -26,6 +26,13 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Prescription> Prescriptions { get; set; }
+
+        public DbSet<Exam> Exams { get; set; }
+
+        public DbSet<SitePages> SitePages { get; set; }
+
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

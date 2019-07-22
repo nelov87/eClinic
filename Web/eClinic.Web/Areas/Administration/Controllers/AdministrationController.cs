@@ -1,14 +1,19 @@
-﻿namespace eClinic.Web.Areas.Administration.Controllers
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using eClinic.Common;
+using eClinic.Data;
+using eClinic.Data.Models;
+using eClinic.Web.Controllers;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+
+namespace eClinic.Web.Areas.Administration.Controllers
 {
-    using eClinic.Common;
-    using eClinic.Web.Controllers;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]
     public class AdministrationController : BaseController
     {
+       
     }
 }

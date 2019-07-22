@@ -8,6 +8,7 @@
     using eClinic.Data.Models;
     using eClinic.Data.Repositories;
     using eClinic.Data.Seeding;
+    using eClinic.Services;
     using eClinic.Services.Data;
     using eClinic.Services.Mapping;
     using eClinic.Services.Messaging;
@@ -99,6 +100,9 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISmsSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+
+            // Front End services
+            services.AddTransient<ISiteService, SiteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -117,6 +121,7 @@
                 }
 
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+                new SiteDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
             if (env.IsDevelopment())

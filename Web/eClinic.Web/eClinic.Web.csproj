@@ -40,6 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Administration\Data\" />
+    <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\TestArea\Data\" />
     <Folder Include="Areas\TestArea\Models\" />
   </ItemGroup>

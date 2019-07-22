@@ -1,0 +1,54 @@
+﻿@model IEnumerable<eClinic.Web.ViewModels.Site.SetingViewModel>
+@{
+    ViewData["Title"] = "Setings";
+}
+
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i></i> Site setings</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Site</li>
+                    <li><i class="fa fa-file-text-o"></i>Site setings</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Site setings
+                    </header>
+                    
+                    <div class="panel-body">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                
+                                @foreach (var seting in Model)
+                                {
+                                    <form asp-area="Administration" asp-controller="Site" asp-action="EditSeting" asp-route-id="@seting.Id" method="post">
+                                        <div class="col-sm-2">
+                                            <label class="col-sm-2 control-label">@seting.Name</label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" value="@seting.Value">
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </form>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
