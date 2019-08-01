@@ -1,8 +1,9 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace eClinic.Data.Models
+namespace EClinic.Data.Models
 {
     public class Prescription
     {
@@ -13,7 +14,7 @@ namespace eClinic.Data.Models
         public DateTime Date { get; set; }
 
         [Required]
-        [MaxLength(200, ErrorMessage ="Prescription mus be les then 200 charecters!")]
+        [MaxLength(1000, ErrorMessage = "Prescription mus be les then 200 charecters!")]
         public string Medicaments { get; set; }
     }
 }

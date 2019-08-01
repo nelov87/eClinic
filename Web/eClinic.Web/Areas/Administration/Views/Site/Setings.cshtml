@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eClinic.Web.ViewModels.Site.SetingViewModel>
+﻿@model EClinic.Web.ViewModels.Site.SetingViewModel
 @{
     ViewData["Title"] = "Setings";
 }
@@ -24,25 +24,25 @@
                     </header>
                     
                     <div class="panel-body">
-                        <div class="form-horizontal">
-                            <div class="form-group">
-                                
-                                @foreach (var seting in Model)
-                                {
-                                    <form asp-area="Administration" asp-controller="Site" asp-action="EditSeting" asp-route-id="@seting.Id" method="post">
-                                        <div class="col-sm-2">
-                                            <label class="col-sm-2 control-label">@seting.Name</label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" value="@seting.Value">
-                                        </div>
+
+                        @foreach (var seting in (List<EClinic.Web.ViewModels.Site.SetingViewModel>)ViewData["SetingsList"])
+                        {
+                            <form class="form-horizontal" asp-area="Administration" asp-controller="Site" asp-action="EditSeting" method="post">
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label class="control-label">@seting.Name</label>
+                                        <input type="hidden" class="form-control" asp-for="Id" value="@seting.Id">
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="Value" value="@seting.Value">
+                                    </div>
+                                    <div class="col-sm-2">
                                         <button type="submit" class="btn btn-success">Save</button>
-                                    </form>
-                                }
+                                    </div>
+                                </div>
+                            </form>
+                        }
 
-                            </div>
-
-                        </div>
                     </div>
                 </section>
 

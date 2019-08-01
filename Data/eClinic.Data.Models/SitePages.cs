@@ -1,7 +1,10 @@
-﻿namespace eClinic.Data.Models
-{
-    using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
+namespace EClinic.Data.Models
+{
     public class SitePages
     {
         [Key]

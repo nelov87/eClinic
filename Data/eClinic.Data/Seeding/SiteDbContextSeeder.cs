@@ -1,18 +1,18 @@
-﻿namespace eClinic.Data.Seeding
+﻿namespace EClinic.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using eClinic.Common;
-    using eClinic.Data.Models;
+    using EClinic.Common;
+    using EClinic.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
 
     public class SiteDbContextSeeder : ISeeder
     {
-        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(EClinicDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext == null)
             {
@@ -26,7 +26,7 @@
 
             var logger = serviceProvider.GetService<ILoggerFactory>().CreateLogger(typeof(SiteDbContextSeeder));
 
-            var userStore = serviceProvider.GetService<UserManager<ApplicationUser>>();
+            var userStore = serviceProvider.GetService<UserManager<EClinicUser>>();
 
             var seeders = new List<ISeeder>
                           {
@@ -40,7 +40,7 @@
                 logger.LogInformation($"Seeder {seeder.GetType().Name} done.");
             }
 
-            var userToAdd = new ApplicationUser
+            var userToAdd = new EClinicUser
             {
                 Email = "nelov87@gmail.com",
                 FirstName = "Ivo",
@@ -52,6 +52,7 @@
                 Address = "Nqkyde Tam 35",
                 Age = 25,
                 SecurityStamp = Guid.NewGuid().ToString(),
+                CreatedOn = DateTime.UtcNow,
             };
 
 

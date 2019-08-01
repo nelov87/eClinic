@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eClinic.Services;
-using eClinic.Services.Data;
-using eClinic.Web.ViewModels.Site;
 using Microsoft.AspNetCore.Mvc;
+using EClinic.Services;
+using EClinic.Web.ViewModels.Site;
 
-namespace eClinic.Web.Areas.Administration.Controllers
+namespace EClinic.Web.Areas.Administration.Controllers
 {
-    public class SiteController : AdministrationController
+    [Area("Administration")]
+    public class SiteController : Controller
     {
         private readonly ISettingsService settingsService;
         private readonly ISiteService siteService;
@@ -40,7 +40,7 @@ namespace eClinic.Web.Areas.Administration.Controllers
         [HttpGet]
         public IActionResult EditAboutUs()
         {
-           
+
             return this.View();
         }
         [HttpPost]
@@ -54,22 +54,31 @@ namespace eClinic.Web.Areas.Administration.Controllers
 
         public IActionResult EditContacts()
         {
-            
+
             return this.View();
         }
 
         [HttpPost]
         public IActionResult EditContacts(int id)
         {
-            
+
             return this.View();
         }
 
         public IActionResult Setings()
         {
             List<SetingViewModel> setings = this.settingsService.GetAll().ToList();
+            this.ViewData["SetingsList"] = setings;
 
-            return this.View(setings);
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult EditSeting(SetingViewModel setingViewModel)
+        {
+            this.settingsService.EditSeting(setingViewModel.Id, setingViewModel.Value);
+
+            return this.Redirect("~/Administration/Site/Setings/");
         }
     }
 }

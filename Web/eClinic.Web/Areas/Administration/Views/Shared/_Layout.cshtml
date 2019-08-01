@@ -274,7 +274,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">Jenifer Smith</span>
+                            <span class="username">@this.User.Identity.Name</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -326,6 +326,7 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
+                            <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="Setings">Site Setings</a></li>
                             <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="IndexPageSlidesAll">Slides</a></li>
                             <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="EditAboutUs">About Us</a></li>
                             <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="EditContacts">Contact Us</a></li>

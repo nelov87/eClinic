@@ -1,4 +1,4 @@
-﻿namespace eClinic.Data.Seeding
+﻿namespace EClinic.Data.Seeding
 {
     using System;
     using System.Linq;
@@ -6,12 +6,12 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using eClinic.Data.Models;
+    using EClinic.Data.Models;
     using Microsoft.AspNetCore.Identity;
 
     internal class SiteSeeder : ISeeder
     {
-        public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
+        public async Task SeedAsync(EClinicDbContext dbContext, IServiceProvider serviceProvider)
         {
             if (dbContext.SitePages.Any())
             {

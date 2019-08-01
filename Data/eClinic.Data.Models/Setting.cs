@@ -1,8 +1,10 @@
-﻿namespace eClinic.Data.Models
-{
-    using eClinic.Data.Common.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-    public class Setting : BaseDeletableModel<int>
+namespace EClinic.Data.Models
+{
+    public class Setting
     {
         public int Id { get; set; }
 
