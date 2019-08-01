@@ -1,86 +1,47 @@
-﻿namespace eClinic.Web.Areas.Identity.Pages.Account
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using EClinic.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using EClinic.Common;
+
+namespace EClinic.Web.Areas.Identity.Pages.Account
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Text.Encodings.Web;
-    using System.Threading.Tasks;
-
-    using eClinic.Data.Models;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.Extensions.Logging;
-
     [AllowAnonymous]
-#pragma warning disable SA1649 // File name should match first type name
     public class RegisterModel : PageModel
-#pragma warning restore SA1649 // File name should match first type name
     {
-        private readonly SignInManager<ApplicationUser> signInManager;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<RegisterModel> logger;
-        private readonly IEmailSender emailSender;
+        private readonly SignInManager<EClinicUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<EClinicUser> _userManager;
+        private readonly ILogger<RegisterModel> _logger;
+        //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            UserManager<EClinicUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            SignInManager<EClinicUser> signInManager,
+            ILogger<RegisterModel> logger
+            )
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.logger = logger;
-            this.emailSender = emailSender;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _signInManager = signInManager;
+            _logger = logger;
+            
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
-
-        public void OnGet(string returnUrl = null)
-        {
-            this.ReturnUrl = returnUrl;
-        }
-
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        {
-            returnUrl = returnUrl ?? this.Url.Content("~/");
-            if (this.ModelState.IsValid)
-            {
-                var user = new ApplicationUser { UserName = this.Input.Email, Email = this.Input.Email };
-                var result = await this.userManager.CreateAsync(user, this.Input.Password);
-                if (result.Succeeded)
-                {
-                    this.logger.LogInformation("User created a new account with password.");
-
-                    var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = this.Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code },
-                        protocol: this.Request.Scheme);
-
-                    await this.emailSender.SendEmailAsync(
-                        this.Input.Email,
-                        "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    await this.signInManager.SignInAsync(user, isPersistent: false);
-                    return this.LocalRedirect(returnUrl);
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    this.ModelState.AddModelError(string.Empty, error.Description);
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return this.Page();
-        }
 
         public class InputModel
         {
@@ -99,6 +60,92 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Username")]
+            public string Username { get; set; }
+
+            [Required]
+            [MinLength(2, ErrorMessage = "First name must be aleest 2 charecters!")]
+            [MaxLength(20, ErrorMessage = "First name must not be more then 20 charecters!")]
+            public string FirstName { get; set; }
+
+            [MinLength(2, ErrorMessage = "Middle name must be aleest 2 charecters!")]
+            [MaxLength(20, ErrorMessage = "Middle name must not be more then 20 charecters!")]
+            public string MiddleName { get; set; }
+
+            [Required]
+            [MinLength(2, ErrorMessage = "Last name must be aleest 2 charecters!")]
+            [MaxLength(20, ErrorMessage = "Last name must not be more then 20 charecters!")]
+            public string LastName { get; set; }
+
+            [Range(0, 110, ErrorMessage = "Age must be in range 0 - 110")]
+            public int Age { get; set; }
+
+            [MinLength(2, ErrorMessage = "Address name must be aleest 2 charecters!")]
+            [MaxLength(50, ErrorMessage = "Address name must not be more then 50 charecters!")]
+            public string Address { get; set; }
+        }
+
+        public void OnGet(string returnUrl = null)
+        {
+            ReturnUrl = returnUrl;
+        }
+
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+            if (ModelState.IsValid)
+            {
+                var isRoot = _userManager.Users.Any();
+
+                var user = new EClinicUser {
+                    UserName = Input.Username,
+                    Address = Input.Address,
+                    Age = Input.Age,
+                    CreatedOn = DateTime.UtcNow,
+                    FirstName = Input.FirstName,
+                    MiddleName = Input.MiddleName,
+                    LastName = Input.LastName,
+                    Email = Input.Email };
+                var result = await _userManager.CreateAsync(user, Input.Password);
+                if (result.Succeeded)
+                {
+                    if (!isRoot)
+                    {
+                        await _userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, GlobalConstants.UserRoleName);
+                    }
+
+                    #region Email sender
+                    //_logger.LogInformation("User created a new account with password.");
+
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { userId = user.Id, code = code },
+                    //    protocol: Request.Scheme);
+
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    #endregion
+
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return LocalRedirect(returnUrl);
+                }
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return Page();
         }
     }
 }

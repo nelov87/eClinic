@@ -1,44 +1,29 @@
-﻿namespace eClinic.Web.Controllers
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using EClinic.Web.Models;
+
+namespace EClinic.Web.Controllers
 {
-    using eClinic.Services;
-    using Microsoft.AspNetCore.Mvc;
-
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
-        private readonly ISiteService siteService;
-
-        public HomeController(ISiteService siteService)
-        {
-            this.siteService = siteService;
-        }
-
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
 
         public IActionResult Privacy()
         {
-            return this.View();
-        }
-
-        public IActionResult AboutUs()
-        {
-            var page = this.siteService.GetContent("About Us");
-            return this.View(page);
-        }
-
-        public IActionResult Services()
-        {
-            return this.View();
-        }
-
-        public IActionResult Contacts()
-        {
-            return this.View();
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() => this.View();
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

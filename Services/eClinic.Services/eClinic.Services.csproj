@@ -1,26 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Data\eClinic.Data\eClinic.Data.csproj" />
-    <ProjectReference Include="..\..\Web\eClinic.Web.ViewModels\eClinic.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\..\Data\EClinic.Data\EClinic.Data.csproj" />
+    <ProjectReference Include="..\..\Web\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj" />
+    <ProjectReference Include="..\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

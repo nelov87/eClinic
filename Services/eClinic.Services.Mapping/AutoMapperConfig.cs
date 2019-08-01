@@ -1,4 +1,4 @@
-﻿namespace eClinic.Services.Mapping
+﻿namespace EClinic.Services.Mapping
 {
     using System;
     using System.Collections.Generic;

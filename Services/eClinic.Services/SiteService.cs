@@ -1,24 +1,27 @@
-﻿namespace eClinic.Services
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using EClinic.Data;
+using EClinic.Services.Mapping;
+using EClinic.Web.ViewModels.Site;
+
+
+
+namespace EClinic.Services
 {
-    using System;
-    using System.Linq;
-
-    using eClinic.Data;
-    using eClinic.Services.Mapping;
-    using eClinic.Web.ViewModels.Site;
-
     public class SiteService : ISiteService
     {
-        private readonly ApplicationDbContext db;
+        private readonly EClinicDbContext db;
 
-        public SiteService(ApplicationDbContext db)
+        public SiteService(EClinicDbContext db)
         {
             this.db = db;
         }
 
         public void EditPage(string page)
         {
-            var a = 1;
+            
         }
 
         public PageViewModel GetContent(string page)

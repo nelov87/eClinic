@@ -1,9 +1,9 @@
-﻿using eClinic.Web.ViewModels.Site;
+﻿using EClinic.Web.ViewModels.Site;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace eClinic.Services
+namespace EClinic.Services
 {
     public interface ISiteService
     {
