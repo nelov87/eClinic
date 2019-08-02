@@ -21,7 +21,10 @@ using EClinic.Services.Mapping;
 using System.Reflection;
 using EClinic.Web.ViewModels.Site;
 using EClinic.Data.Seeding;
+<<<<<<< HEAD
 using EClinic.Services.FrontEnd;
+=======
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
 
 namespace EClinic.Web
 {
@@ -66,6 +69,7 @@ namespace EClinic.Web
             //User Services registration
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISiteService, SiteService>();
+<<<<<<< HEAD
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IPageService, PageService>();
 
@@ -73,6 +77,11 @@ namespace EClinic.Web
             services.AddMvc(options => 
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute())
                 ).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+=======
+
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,7 +18,10 @@
     <ProjectReference Include="..\..\Common\EClinic.Common\EClinic.Common.csproj" />
     <ProjectReference Include="..\..\Data\EClinic.Data\EClinic.Data.csproj" />
     <ProjectReference Include="..\..\Services\EClinic.Services\EClinic.Services.csproj" />
+<<<<<<< HEAD
     <ProjectReference Include="..\EClinic.Web.InputModels\EClinic.Web.InputModels.csproj" />
+=======
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
     <ProjectReference Include="..\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj" />
   </ItemGroup>
 

@@ -19,7 +19,7 @@ namespace EClinic.Services
             this.db = db;
         }
 
-
+ 
         //public PageViewModel GetPage(string id)
         //{
         //    return this.db.SitePages.To<PageViewModel>().FirstOrDefault(x => x.Id == id);

@@ -5,13 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using EClinic.Web.Models;
+<<<<<<< HEAD
 using EClinic.Services.FrontEnd;
 using EClinic.Services;
+=======
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
 
 namespace EClinic.Web.Controllers
 {
     public class HomeController : Controller
     {
+<<<<<<< HEAD
         private readonly IMenuService menuService;
         private readonly IPageService pageService;
 
@@ -36,6 +40,20 @@ namespace EClinic.Web.Controllers
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public async Task<IActionResult> Error()
+=======
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

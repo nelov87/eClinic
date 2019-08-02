@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿@model EClinic.Web.InputModels.SetingsInputModel
+=======
+﻿@model EClinic.Web.ViewModels.Site.SetingViewModel
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
 @{
     ViewData["Title"] = "Setings";
 }
@@ -27,16 +31,26 @@
 
                         @foreach (var seting in (List<EClinic.Web.ViewModels.Site.SetingViewModel>)ViewData["SetingsList"])
                         {
+<<<<<<< HEAD
                             <form class="form-horizontal" asp-area="Administration" asp-controller="Site" asp-action="EditSeting" method="post" >
+=======
+                            <form class="form-horizontal" asp-area="Administration" asp-controller="Site" asp-action="EditSeting" method="post">
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
                                 <div class="form-group">
                                     <div class="col-sm-2">
                                         <label class="control-label">@seting.Name</label>
                                         <input type="hidden" class="form-control" asp-for="Id" value="@seting.Id">
+<<<<<<< HEAD
                                         <span asp-validation-for="@Model.Id" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" asp-for="Value" value="@seting.Value">
                                         <span asp-validation-for="@Model.Value" class="text-danger"></span>
+=======
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" asp-for="Value" value="@seting.Value">
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" class="btn btn-success">Save</button>

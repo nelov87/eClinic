@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EClinic.Data\EClinic.Data.csproj" />
+<<<<<<< HEAD
     <ProjectReference Include="..\..\Web\EClinic.Web.InputModels\EClinic.Web.InputModels.csproj" />
+=======
+>>>>>>> 0ceb752719ae7cab6b8164dd8918aaa8455e9c7f
     <ProjectReference Include="..\..\Web\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj" />
     <ProjectReference Include="..\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj" />
   </ItemGroup>

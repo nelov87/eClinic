@@ -40,8 +40,7 @@
                 logger.LogInformation($"Seeder {seeder.GetType().Name} done.");
             }
 
-            var AdminUserToAdd = new EClinicUser
-            {
+			var AdminUserToAdd = new EClinicUser            {
                 Email = "nelov87@gmail.com",
                 FirstName = "Ivo",
                 MiddleName = "Peshov",
