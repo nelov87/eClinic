@@ -40,26 +40,44 @@
                 logger.LogInformation($"Seeder {seeder.GetType().Name} done.");
             }
 
-            var userToAdd = new EClinicUser
+            var AdminUserToAdd = new EClinicUser
             {
                 Email = "nelov87@gmail.com",
                 FirstName = "Ivo",
                 MiddleName = "Peshov",
                 LastName = "Petrov",
-                UserName = "nelov87@gmail.com",
+                UserName = "nelov87",
                 NormalizedEmail = "NELOV87@GMAIL.COM",
-                NormalizedUserName = "NELOV87@GMAIL.COM",
+                NormalizedUserName = "NELOV87",
                 Address = "Nqkyde Tam 35",
                 Age = 25,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 CreatedOn = DateTime.UtcNow,
             };
 
+            var userToAdd = new EClinicUser
+            {
+                Email = "nelov872@gmail.com",
+                FirstName = "Petyr",
+                MiddleName = "Peshov",
+                LastName = "Petrov",
+                UserName = "nelov872",
+                NormalizedEmail = "NELOV872@GMAIL.COM",
+                NormalizedUserName = "NELOV872",
+                Address = "I tuk i tam",
+                Age = 30,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                CreatedOn = DateTime.UtcNow,
+            };
 
+
+            await userStore.CreateAsync(AdminUserToAdd, "123456");
             await userStore.CreateAsync(userToAdd, "123456");
             dbContext.SaveChanges();
-            var user = await userStore.FindByEmailAsync("nelov87@gmail.com");
-            await userStore.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
+            var adminUser = await userStore.FindByEmailAsync("nelov87@gmail.com");
+            var user = await userStore.FindByEmailAsync("nelov872@gmail.com");
+            await userStore.AddToRoleAsync(adminUser, GlobalConstants.AdministratorRoleName);
+            await userStore.AddToRoleAsync(user, GlobalConstants.UserRoleName);
         }
     }
 }

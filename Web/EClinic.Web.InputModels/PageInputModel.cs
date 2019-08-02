@@ -1,13 +1,11 @@
-﻿using EClinic.Data.Models;
-using EClinic.Services.Mapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace EClinic.Web.ViewModels.Site
+namespace EClinic.Web.InputModels
 {
-    public class PageViewModel : IMapFrom<SitePages>
+    public class PageInputModel
     {
         [Required]
         public string Id { get; set; }
@@ -23,7 +21,5 @@ namespace EClinic.Web.ViewModels.Site
         public string Content { get; set; }
 
         public string ImageUrl { get; set; }
-
-        public DateTime CreatedOn { get; set; }
     }
 }

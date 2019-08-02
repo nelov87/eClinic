@@ -1,0 +1,81 @@
+﻿@model EClinic.Web.InputModels.PageInputModel
+@{
+    ViewData["Title"] = "EditPage";
+}
+@{
+    var pageViewModel = (EClinic.Web.ViewModels.Site.PageViewModel)ViewData["Page"];
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Form elements</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Site</li>
+                    <li><i class="fa fa-file-text-o"></i><a asp-area="Administration" asp-controller="Site" asp-action="GetAllPages">Pages</a></li>
+                    <li><i class="fa fa-file-text-o"></i>Edit Page</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Form Elements
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-horizontal" asp-action="EditPage" method="post" id="page-details" >
+                            @*@Html.AntiForgeryToken()*@
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">@Html.DisplayNameFor(model => model.Title):</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="Title" class="form-control" form="page-details" value="@pageViewModel.Title">
+                                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <input type="hidden" asp-for="Id" class="form-control" form="page-details" value="@pageViewModel.Id">
+
+                            @*<div class="form-group">
+         <div id="editor" class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div>
+         <label class="col-sm-2 control-label">@Html.DisplayNameFor(model => model.Content):</label>
+         <div class="col-sm-10">
+
+             <input type="text" class="form-control" value="@Model.Content">
+              <span asp-validation-for="@Model.Content" class="text-danger"></span>
+           </div>
+        </div>*@
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Image Url:</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="ImageUrl" class="form-control" value="@pageViewModel.ImageUrl">
+                                    <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </form>
+                        <div class="row">
+
+                            <div class="col-sm-2 control-label">
+                                <label style="float:right">Content</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <textarea class="ckeditor" name="content" form="page-details">@pageViewModel.Content</textarea>
+                                
+                                <div class="button-holder d-flex pull-right">
+                                    <button type="submit" class="btn btn-success" form="page-details">Save</button>
+                                    <a class="btn btn-danger" asp-area="Administration" asp-controller="Site" asp-action="GetAllPages">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <partial name="Partials/_ValidationScriptsPartial" />
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->

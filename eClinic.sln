@@ -13,17 +13,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Data.Models", "Data
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Data", "Data\EClinic.Data\EClinic.Data.csproj", "{057D4D89-99D5-4BDD-97C9-38CCCF6AD2ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Web", "Web\EClinic.Web\EClinic.Web.csproj", "{97244CF6-37E0-4A12-B66A-847787D8166F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Web", "Web\EClinic.Web\EClinic.Web.csproj", "{97244CF6-37E0-4A12-B66A-847787D8166F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{90BED4D2-029F-43D2-8F10-014E29613DDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Common", "Common\EClinic.Common\EClinic.Common.csproj", "{99A34380-3C74-4EE5-A462-FF076703EE23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Common", "Common\EClinic.Common\EClinic.Common.csproj", "{99A34380-3C74-4EE5-A462-FF076703EE23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Web.ViewModels", "Web\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj", "{13708A87-93BC-45F1-BA12-A9E0D90CB4FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Web.ViewModels", "Web\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj", "{13708A87-93BC-45F1-BA12-A9E0D90CB4FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Services", "Services\EClinic.Services\EClinic.Services.csproj", "{F5F9673B-3D57-4AC5-A5ED-BCCA371C900B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Services", "Services\EClinic.Services\EClinic.Services.csproj", "{F5F9673B-3D57-4AC5-A5ED-BCCA371C900B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Web.InputModels", "Web\EClinic.Web.InputModels\EClinic.Web.InputModels.csproj", "{5DA3D248-2222-486F-B08E-9FC3322C6FF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Web.InputModels", "Web\EClinic.Web.InputModels\EClinic.Web.InputModels.csproj", "{5DA3D248-2222-486F-B08E-9FC3322C6FF1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Services.Mapping", "Services\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj", "{30802E7F-EACF-4D48-A598-048774276789}"
 EndProject

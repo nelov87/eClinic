@@ -19,5 +19,11 @@ namespace EClinic.Data.Models
         [MinLength(5, ErrorMessage = "Minimum lenght of Content is 5 charecters!")]
         [MaxLength(2000, ErrorMessage = "Maximum lenght of Content is 2000 charecters!")]
         public string Content { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public DateTime ModifiedOn { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model EClinic.Web.ViewModels.Site.SetingViewModel
+﻿@model EClinic.Web.InputModels.SetingsInputModel
 @{
     ViewData["Title"] = "Setings";
 }
@@ -22,19 +22,21 @@
                     <header class="panel-heading">
                         Site setings
                     </header>
-                    
+
                     <div class="panel-body">
 
                         @foreach (var seting in (List<EClinic.Web.ViewModels.Site.SetingViewModel>)ViewData["SetingsList"])
                         {
-                            <form class="form-horizontal" asp-area="Administration" asp-controller="Site" asp-action="EditSeting" method="post">
+                            <form class="form-horizontal" asp-area="Administration" asp-controller="Site" asp-action="EditSeting" method="post" >
                                 <div class="form-group">
                                     <div class="col-sm-2">
                                         <label class="control-label">@seting.Name</label>
                                         <input type="hidden" class="form-control" asp-for="Id" value="@seting.Id">
+                                        <span asp-validation-for="@Model.Id" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-8">
                                         <input type="text" class="form-control" asp-for="Value" value="@seting.Value">
+                                        <span asp-validation-for="@Model.Value" class="text-danger"></span>
                                     </div>
                                     <div class="col-sm-2">
                                         <button type="submit" class="btn btn-success">Save</button>
@@ -51,4 +53,7 @@
         <!-- page end-->
     </section>
 </section>
+
+<partial name="Partials/_ValidationScriptsPartial" />
+
 <!--main content end-->

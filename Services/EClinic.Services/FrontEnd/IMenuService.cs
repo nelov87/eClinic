@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EClinic.Services
+namespace EClinic.Services.FrontEnd
 {
-    public interface ISiteService
+    public interface IMenuService
     {
-        
+        ICollection<MenuViewModel> GetAll();
 
         
     }

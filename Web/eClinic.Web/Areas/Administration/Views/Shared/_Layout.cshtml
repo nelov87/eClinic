@@ -328,8 +328,8 @@
                         <ul class="sub">
                             <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="Setings">Site Setings</a></li>
                             <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="IndexPageSlidesAll">Slides</a></li>
-                            <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="EditAboutUs">About Us</a></li>
-                            <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="EditContacts">Contact Us</a></li>
+                            <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="GetAllPages">Pages</a></li>
+
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -444,7 +444,8 @@
         <script src="~/js/sparklines.js"></script>
         <script src="~/js/charts.js"></script>
         <script src="~/js/jquery.slimscroll.min.js"></script>
-        
+        <script type="text/javascript" src="~/assets/ckeditor/ckeditor.js"></script>
+
         <script>
             //knob
             $(function () {
@@ -491,6 +492,10 @@
             });
         </script>
 
-        @*@this.RenderSection("Scripts", required: false)*@
+        @this.RenderSection("Scripts", required: false)
+
+
+
+
 </body>
 </html>

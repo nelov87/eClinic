@@ -6,23 +6,22 @@ using EClinic.Data;
 using EClinic.Services.Mapping;
 using EClinic.Web.ViewModels.Site;
 
-
-
-namespace EClinic.Services
+namespace EClinic.Services.FrontEnd
 {
-    public class SiteService : ISiteService
+    public class MenuService : IMenuService
     {
         private readonly EClinicDbContext db;
 
-        public SiteService(EClinicDbContext db)
+        public MenuService(EClinicDbContext db)
         {
             this.db = db;
         }
 
+        public ICollection<MenuViewModel> GetAll()
+        {
+            return this.db.SitePages.To<MenuViewModel>().ToHashSet();
+        }
 
-        //public PageViewModel GetPage(string id)
-        //{
-        //    return this.db.SitePages.To<PageViewModel>().FirstOrDefault(x => x.Id == id);
-        //}
+        
     }
 }

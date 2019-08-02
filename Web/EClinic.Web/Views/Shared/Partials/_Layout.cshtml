@@ -35,7 +35,7 @@
                             <li> <a><i class="fab fa-pinterest-p"></i></a></li>
                             <li><a><i class="fab fa-twitter"></i></a></li>
                             <li> <a><i class="fab fa-facebook-f"></i></a></li>
-                            <partial name="_LoginPartial" />
+                            <partial name="Partials/_LoginPartial" />
                         </ul>
                     </div>
                 </div>
@@ -50,20 +50,13 @@
                         <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-md-none small-menu fa-bars"></i></a>
                     </div>
                     <div id="menu" class="col-lg-8 col-md-9 d-none d-md-block nav-item">
-                        <ul>
-                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                            <li><a asp-controller="Home" asp-action="AboutUs">About Us</a></li>
-                            <li><a asp-controller="Home" asp-action="Services">Services</a></li>
-                            <li><a asp-controller="News" asp-action="AllNews">News</a></li>
-                            <li><a asp-controller="Gallery" asp-action="All">Gallery</a></li>
-                            <li><a asp-controller="Home" asp-action="Contacts">Contact Us</a></li>
-                        </ul>
+                        @await Component.InvokeAsync("MenuComponent")
                     </div>
                     <div class="col-sm-2 d-none d-lg-block appoint">
                         <a class="btn btn-info" asp-controller="Appointment" asp-action="ShowMonth">Book an Appointment</a>
                     </div>
                 </div>
-
+                
             </div>
         </div>
 
