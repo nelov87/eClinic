@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>eClinic | @ViewData["Title"]</title>
+
+    <link rel="shortcut icon" href="assets/images/fav.jpg">
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/fontawsom-all.min.css">
+    <link rel="stylesheet" href="~/assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/style.css" />
+    <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+</head>
+
+<body>
+
+    <!-- ################# Header Starts Here####################### -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 left-item">
+                        <ul>
+                            <li><i class="fas fa-envelope-square"></i> sales@smarteyeapps.com</li>
+                            <li><i class="fas fa-phone-square"></i> +123 987 887 765</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block right-item">
+                        <ul>
+                            <li><a><i class="fab fa-github"></i></a></li>
+                            <li><a><i class="fab fa-google-plus-g"></i></a></li>
+                            <li> <a><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a><i class="fab fa-twitter"></i></a></li>
+                            <li> <a><i class="fab fa-facebook-f"></i></a></li>
+                            <partial name="Partials/_LoginPartial" />
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="nav-head" class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 no-padding col-sm-12 nav-img">
+                        <img src="~/assets/images/logo.jpg" alt="">
+                        <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-md-none small-menu fa-bars"></i></a>
+                    </div>
+                    <div id="menu" class="col-lg-8 col-md-9 d-none d-md-block nav-item">
+                        @await Component.InvokeAsync("MenuComponent")
+                    </div>
+                    <div class="col-sm-2 d-none d-lg-block appoint">
+                        <a class="btn btn-info" asp-controller="Appointment" asp-action="ShowMonth">Book an Appointment</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </header>
+    @*<div class="container">
+
+            <div class="page-nav no-margin row">
+                <div class="container">
+                    <div class="row">
+                        <h2>About Dil Homeopathy Clinic</h2>
+                        <partial name="_CookieConsentPartial" />
+                    </div>
+                </div>
+            </div>
+            <div class="blog-row row">
+
+                <main role="main" class="pb-3">
+
+                </main>
+            </div>
+        </div>*@
+
+    @this.RenderBody()
+
+    <footer class="footer">
+        <div class="container">
+            &copy; eClinic 2019
+
+        </div>
+
+
+    </footer>
+
+    <environment names="Development">
+        <!--<script src="assets/js/jquery-3.2.1.min.js"></script>-->
+        <script src="~/assets/js/popper.min.js"></script>
+        <!--<script src="assets/js/bootstrap.min.js"></script>-->
+        <script src="~/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+        <script src="~/assets/js/script.js"></script>
+
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <!--<script src="assets/js/jquery-3.2.1.min.js"></script>-->
+        <script src="~/assets/js/popper.min.js"></script>
+        <!--<script src="assets/js/bootstrap.min.js"></script>-->
+        <script src="~/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+        <script src="~/assets/js/script.js"></script>
+
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @this.RenderSection("Scripts", required: false)
+</body>
+</html>
