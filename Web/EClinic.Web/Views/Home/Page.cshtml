@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = @Model.Title;
+    ViewData["Title"] = @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Title));
 }
 
 @model EClinic.Web.ViewModels.Site.PageViewModel
@@ -10,7 +10,7 @@
 <div class="page-nav no-margin row">
     <div class="container">
         <div class="row">
-            <h2>@Model.Title</h2>
+            <h2>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Title))</h2>
             
         </div>
     </div>
@@ -23,7 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-12 txtr">
-                <p>@Model.Content</p>
+                <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Content))</p>
             </div>
             <div class="col-lg-6 col-md-12">
                 <img src="~/assets/images/why.jpg" alt="">

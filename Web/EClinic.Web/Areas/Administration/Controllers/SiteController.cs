@@ -50,6 +50,29 @@ namespace EClinic.Web.Areas.Administration.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AddPage()
+        {
+            
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPage(PageInputModel pageInput)
+        {
+            await this.pageService.AddPage(pageInput);
+
+            return this.Redirect("~/Administration/Site/GetAllPages");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletePage(string id)
+        {
+            await this.pageService.DeletePage(id);
+
+            return this.Redirect("~/Administration/Site/GetAllPages");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> EditSlide(int id)
         {
             return this.View();

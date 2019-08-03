@@ -22,6 +22,9 @@ using System.Reflection;
 using EClinic.Web.ViewModels.Site;
 using EClinic.Data.Seeding;
 using EClinic.Services.FrontEnd;
+using EClinic.Services.Administration;
+
+
 
 namespace EClinic.Web
 {
@@ -48,8 +51,12 @@ namespace EClinic.Web
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<EClinicUser, IdentityRole>()
-                .AddEntityFrameworkStores<EClinicDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<EClinicDbContext>();
+                
+                
+                
+                
 
             services.Configure<IdentityOptions>(option =>
             {
@@ -68,6 +75,7 @@ namespace EClinic.Web
             services.AddTransient<ISiteService, SiteService>();
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IPageService, PageService>();
+            services.AddTransient<IUsersService, UsersService>();
 
 
             services.AddMvc(options => 
@@ -130,6 +138,7 @@ namespace EClinic.Web
                     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                     app.UseHsts();
                 }
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

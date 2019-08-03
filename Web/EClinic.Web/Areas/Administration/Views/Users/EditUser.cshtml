@@ -1,0 +1,170 @@
+﻿@model EClinic.Web.ViewModels.Administration.EditUserViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Form elements</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Site</li>
+                    <li><i class="fa fa-file-text-o"></i><a asp-area="Administration" asp-controller="Site" asp-action="GetAllUserss">Users</a></li>
+                    <li><i class="fa fa-file-text-o"></i>Edit User</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Edit User: <strong>@Model.FirstName @Model.LastName</strong>
+                    </header>
+                    <div class="panel-body">
+                        <!-- page start-->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <section class="panel">
+                                    <header class="panel-heading tab-bg-info">
+                                        <ul class="nav nav-tabs">
+                                            <li>
+                                                <a data-toggle="tab" href="#profile">
+                                                    <i class="icon-user"></i>
+                                                    Profile
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                                <a data-toggle="tab" href="#edit-profile">
+                                                    <i class="icon-envelope"></i>
+                                                    Edit Profile
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </header>
+                                    <div class="panel-body">
+                                        <div class="tab-content">
+                                            <!-- profile -->
+                                            <div id="profile" class="tab-pane active">
+                                                <section class="panel">
+                                                    <div class="panel-body bio-graph-info">
+                                                        <h1>Bio Graph</h1>
+                                                        <div class="row">
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.FirstName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.FirstName)) </p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.MiddleName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.MiddleName))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.LastName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.LastName))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.Age)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Age.ToString()))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.Address)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Address))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.Email)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Email))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.CreatedOn)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.CreatedOn.ToString()))</p>
+                                                            </div>
+                                                            <div class="bio-row">
+                                                                <p><span>@Html.DisplayNameFor(x => x.UserRoles)</span>:
+                                                                @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(String.Join(", ", @Model.UserRoles)))
+                                                                
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                                <section>
+                                                    <div class="row">
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <!-- edit-profile -->
+                                            <div id="edit-profile" class="tab-pane">
+                                                <section class="panel">
+                                                    <div class="panel-body bio-graph-info">
+                                                        <h1> Profile Info</h1>
+                                                        <form class="form-horizontal" asp-controller="Users" asp-action="EditUser" method="post" role="form">
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.FirstName)</label>
+                                                                <div class="col-lg-6">
+                                                                    @Html.EditorFor(x => x.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.MiddleName)</label>
+                                                                <div class="col-lg-6">
+                                                                    @Html.EditorFor(x => x.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    <span asp-validation-for="@Model.MiddleName" class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.LastName)</label>
+                                                                <div class="col-lg-10">
+                                                                    @Html.EditorFor(x => x.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.Age)</label>
+                                                                <div class="col-lg-6">
+                                                                    @Html.EditorFor(x => x.Age, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    <span asp-validation-for="@Model.Age" class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.Address)</label>
+                                                                <div class="col-lg-6">
+                                                                    @Html.EditorFor(x => x.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                                                    <span asp-validation-for="@Model.Address" class="text-danger"></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.Email)</label>
+                                                                <div class="col-lg-6">
+                                                                    @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Email))
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-lg-2 control-label">@Html.DisplayNameFor(x => x.UserRoles)</label>
+                                                                <div class="col-lg-6">
+                                                                    <input type="checkbox" name="vehicle" value="Bike" > I have a bike<br>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="form-group">
+                                                                <div class="col-lg-offset-2 col-lg-10">
+                                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                                    <a asp-controller="Users" asp-action="GetAllUsers" class="btn btn-danger">Cancel</a>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+
+                        <!-- page end-->
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <partial name="Partials/_ValidationScriptsPartial" />
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
