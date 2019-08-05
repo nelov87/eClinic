@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using EClinic.Services.Administration;
 using EClinic.Services.FrontEnd;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EClinic.Web.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
         private readonly IAppointmentService appointmentService;
@@ -63,6 +65,11 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> CreateAppointment(string userName, string doctor, DateTime date)
         {
+            //{ 01 - Jan - 01 12:00:00 AM}
+            if (date == DateTime.MinValue)
+            {
+                return this.Redirect("ShowMonth");
+            }
 
             await this.appointmentService.CreateAppointment(userName, doctor, date);
            

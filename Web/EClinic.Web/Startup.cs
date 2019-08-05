@@ -53,10 +53,10 @@ namespace EClinic.Web
             services.AddIdentity<EClinicUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<EClinicDbContext>();
-                
-                
-                
-                
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Identity/Account/Login");
+
+
 
             services.Configure<IdentityOptions>(option =>
             {

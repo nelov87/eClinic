@@ -46,7 +46,7 @@ namespace EClinic.Services.FrontEnd
         public async Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentForDoctorForDay(string doctorid, DateTime date)
         {
             var appointments = this.db.Appointments
-                .Where(a => a.DoctorId == doctorid)
+                .Where(a => a.DoctorId == doctorid && a.AppointmentDateTime.Month == date.Month && a.AppointmentDateTime.Day == date.Day)
                 .To<AppointmentGetAllForDayViewModel>().ToList();
 
             //foreach (var item in appointments)

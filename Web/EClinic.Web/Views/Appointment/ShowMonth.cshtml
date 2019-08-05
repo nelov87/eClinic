@@ -302,11 +302,10 @@ main {
 
                     <main>
                         <div class="toolbar">
-                            <div class="current-month">June 2016</div>
-                            <div class="search-input">
-                                <input type="text" value="What are you looking for?">
-                                <i class="fa fa-search"></i>
-                            </div>
+                            <div class="current-month"><a asp-action="ShowMonth" asp-route-previousNext="previous">Previous motht</a></div>
+                            <div class="current-month">@DateTime.Parse($"01/{ViewData["Month"]}/{DateTime.Now.Year}").ToString("MMMM")</div>
+                            <div class="current-month"><a asp-action="ShowMonth" asp-route-previousNext="next">Next motht</a></div>
+
                         </div>
                         <div class="calendar">
                             <div class="calendar__header">
@@ -324,58 +323,14 @@ main {
                                  <div class="calendar__week">
                                      @for (var dayOfWeek = 0; dayOfWeek < 7 && day <= monthDays; dayOfWeek++)
                                      {
-                                         <div class="calendar__day day">@day <div class="inline-flex text-white"><a class="btn btn-info btn-sm" asp-controller="Appointment" asp-action="ShowDay" asp-route-day="@day" asp-route-month="@month" asp-route-doctor="@ViewData["Doctor"]">Резервирай</a></div></div>
+                                         <div class="calendar__day day">@day <div class="inline-flex text-white"><a class="btn btn-info btn-sm" asp-controller="Appointment" asp-action="ShowDay" asp-route-day="@day" asp-route-month="@month" asp-route-doctor="@ViewData["Doctor"]">Choose day</a></div></div>
                                          
                                          day++;
                                      }
                                 </div>
                              }
 
-                            <div class="calendar__week">
-                                <div class="calendar__day day">1 <div class="inline-flex text-white"><a class="btn btn-info btn-sm">Резервирай</a></div></div>
-                                <div class="calendar__day day">2</div>
-                                <div class="calendar__day day">3</div>
-                                <div class="calendar__day day">4</div>
-                                <div class="calendar__day day">5</div>
-                                <div class="calendar__day day">6</div>
-                                <div class="calendar__day day">7</div>
-                            </div>
-                            <div class="calendar__week">
-                                <div class="calendar__day day">8</div>
-                                <div class="calendar__day day">9</div>
-                                <div class="calendar__day day">10</div>
-                                <div class="calendar__day day">11</div>
-                                <div class="calendar__day day">12</div>
-                                <div class="calendar__day day">13</div>
-                                <div class="calendar__day day">14</div>
-                            </div>
-                            <div class="calendar__week">
-                                <div class="calendar__day day">15</div>
-                                <div class="calendar__day day">16</div>
-                                <div class="calendar__day day">17</div>
-                                <div class="calendar__day day">18</div>
-                                <div class="calendar__day day">19</div>
-                                <div class="calendar__day day">20</div>
-                                <div class="calendar__day day">21</div>
-                            </div>
-                            <div class="calendar__week">
-                                <div class="calendar__day day">22</div>
-                                <div class="calendar__day day">23</div>
-                                <div class="calendar__day_Full day">24</div>
-                                <div class="calendar__day day">25</div>
-                                <div class="calendar__day day">26</div>
-                                <div class="calendar__day day">27</div>
-                                <div class="calendar__day day">28</div>
-                            </div>
-                            <div class="calendar__week">
-                                <div class="calendar__day day">29</div>
-                                <div class="calendar__day day">30</div>
-                                <div class="calendar__day day">31</div>
-                                <div class="calendar__day day">1</div>
-                                <div class="calendar__day day">2</div>
-                                <div class="calendar__day day">3</div>
-                                <div class="calendar__day day">4</div>
-                            </div>
+                            
                         </div>
                     </main>
                     

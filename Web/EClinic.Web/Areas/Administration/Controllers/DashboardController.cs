@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EClinic.Web.Areas.Administration.Controllers
 {
+    [Authorize]
     [Area("Administration")]
     public class DashboardController : Controller
     {

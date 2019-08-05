@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using EClinic.Services.Administration;
 using EClinic.Web.ViewModels.Administration;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EClinic.Web.Areas.Administration.Controllers
 {
+    [Authorize]
     [Area("Administration")]
     public class UsersController : Controller
     {

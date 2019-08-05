@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using EClinic.Services;
 using EClinic.Web.ViewModels.Site;
 using EClinic.Web.InputModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EClinic.Web.Areas.Administration.Controllers
 {
+    [Authorize]
     [Area("Administration")]
     public class SiteController : Controller
     {
