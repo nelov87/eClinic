@@ -16,10 +16,23 @@ namespace EClinic.Data
 
         public DbSet<SitePages> SitePages { get; set; }
 
+        public DbSet<Appointment> Appointments { get; set; }
+
 
         public EClinicDbContext(DbContextOptions options) : base(options)
         {
             
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Appointment>()
+                .HasOne(x => x.Patient)
+                .WithMany(x => x.Appointment)
+                .HasForeignKey(x => x.PatientId);
+
+
+            base.OnModelCreating(builder);
         }
     }
 }

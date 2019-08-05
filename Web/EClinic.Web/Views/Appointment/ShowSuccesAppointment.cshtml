@@ -1,0 +1,29 @@
+﻿
+@model EClinic.Web.ViewModels.Appointments.GetSuccsesAppointmentViewModel
+
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2>Appointment Succses</h2>
+
+        </div>
+    </div>
+</div>
+
+<!-- ######## Page  Title End ####### -->
+<!-- ################# With Medical Starts Here#######################--->
+
+<section class="with-medical" style="height:65%">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-12 txtr">
+                <p><strong>Name: </strong>@Model.Patient</p>
+                <p><strong>Date: </strong>@Model.AppointmentDadeTime.ToString("dd-MM-yyyy")</p>
+                <p><strong>Hour: </strong>@Model.AppointmentDadeTime.ToString("hh:mm")</p>
+                <p><strong>Doctor: </strong>@Model.DoctorName</p>
+            </div>
+            
+        </div>
+    </div>
+</section>

@@ -76,6 +76,8 @@ namespace EClinic.Web
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IPageService, PageService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IAppointmentService, AppointmentService>();
+            services.AddTransient<IDoctorService, DoctorService>();
 
 
             services.AddMvc(options => 

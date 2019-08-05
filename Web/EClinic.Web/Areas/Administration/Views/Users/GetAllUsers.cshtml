@@ -56,7 +56,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <a asp-area="Administration" asp-controller="Users" asp-action="EditUser" asp-route-email="@user.Email" class="btn btn-primary"><i class="icon_pencil-edit_alt"></i></a>
-                                            <a class="btn btn-danger" asp-action="DeleteUser" asp-route-email="@user.Email"><i class="icon_close_alt2"></i></a>
+                                            <a class="btn btn-danger"asp-area="Administration" asp-controller="Users"  asp-action="DeleteUser" asp-route-email="@user.Email"><i class="icon_close_alt2"></i></a>
                                         </div>
                                     </td>
                                 </tr>

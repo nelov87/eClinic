@@ -1,0 +1,51 @@
+﻿@model ICollection<EClinic.Web.ViewModels.Appointments.DoctorNameAndIdViewModel>
+
+
+@{
+    ViewData["Title"] = "ShowMont";
+}
+
+
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+    <div class="container">
+        <div class="row">
+            <h2>Book an Appointment</h2>
+
+        </div>
+    </div>
+</div>
+
+<!-- ######## Page  Title End ####### -->
+<!-- ################# With Medical Starts Here#######################--->
+
+<section class="our-team">
+    <div class="container">
+        <div class="row team-member">
+            <!-- Doctors Start Hire -->
+
+            @foreach (var doctor in Model)
+            {
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="user-card">
+                        <div class="userar">
+                            <img class="teammempic" alt="" src="assets/images/team/team-memb1.jpg">
+                        </div>
+                        <div class="detfs">
+                            <p>@doctor.Name</p>
+                            <br>
+                            <p><span><a class="btn btn-info" asp-controller="Appointment" asp-action="ShowMonth" asp-route-id="@doctor.Id">Make Appointment</a></span></p>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            }
+
+
+        </div>
+    </div>
+</section>
+

@@ -12,6 +12,7 @@ namespace EClinic.Data.Models
             this.Id = Guid.NewGuid().ToString();
             this.Exams = new HashSet<Exam>();
             this.Prescriptions = new HashSet<Prescription>();
+            this.Appointment = new HashSet<Appointment>();
         }
 
         // Audit info
@@ -48,6 +49,8 @@ namespace EClinic.Data.Models
         public ICollection<Exam> Exams { get; set; }
 
         public ICollection<Prescription> Prescriptions { get; set; }
+
+        public ICollection<Appointment> Appointment { get; set; }
 
     }
 }

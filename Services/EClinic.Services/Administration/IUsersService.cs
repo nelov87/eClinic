@@ -11,5 +11,12 @@ namespace EClinic.Services.Administration
         Task<List<UserViewModel>> GetAllUsers();
 
         Task<EditUserViewModel> GetUser(string email);
+
+        Task<List<string>> GetAllRoles();
+
+        Task<bool> EditUser(EditUserViewModel viewModel);
+
+        Task<bool> DeleteUser(string email);
+        
     }
 }
