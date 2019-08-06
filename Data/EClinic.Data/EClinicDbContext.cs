@@ -10,8 +10,6 @@ namespace EClinic.Data
     {
         public DbSet<Exam> Exams { get; set; }
 
-        public DbSet<Prescription> Prescriptions { get; set; }
-
         public DbSet<Setting> Settings { get; set; }
 
         public DbSet<SitePages> SitePages { get; set; }
@@ -31,6 +29,11 @@ namespace EClinic.Data
                 .WithMany(x => x.Appointment)
                 .HasForeignKey(x => x.PatientId);
 
+            builder.Entity<Exam>()
+                .HasOne(u => u.Patient)
+                .WithMany(e => e.Exams)
+                .HasForeignKey(u => u.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }

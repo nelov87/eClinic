@@ -10,6 +10,7 @@ namespace EClinic.Data.Models
         [Key]
         public string Id { get; set; }
 
+        [Required]
         public DateTime CreatedOn { get; set; }
 
 

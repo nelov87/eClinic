@@ -7,12 +7,12 @@ using EClinic.Services;
 using EClinic.Web.ViewModels.Site;
 using EClinic.Web.InputModels;
 using Microsoft.AspNetCore.Authorization;
+using EClinic.Common;
 
 namespace EClinic.Web.Areas.Administration.Controllers
 {
-    [Authorize]
-    [Area("Administration")]
-    public class SiteController : Controller
+    
+    public class SiteController : AdministrationController
     {
         private readonly ISettingsService settingsService;
         private readonly IPageService pageService;
@@ -25,6 +25,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> GetAllPages()
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             var pages = await this.pageService.GetAllPages();
 
             return this.View(pages);
@@ -32,13 +37,23 @@ namespace EClinic.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> IndexPageSlidesAll()
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> EditPage(string id)
         {
-             this.ViewData["Page"] = await this.pageService.GetPage(id);
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
+            this.ViewData["Page"] = await this.pageService.GetPage(id);
 
             return this.View();
         }
@@ -46,6 +61,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> EditPage(PageInputModel pageInput)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             await this.pageService.EditPage(pageInput);
 
             return this.Redirect("~/Administration/Site/GetAllPages");
@@ -54,13 +74,22 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> AddPage()
         {
-            
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPage(PageInputModel pageInput)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             await this.pageService.AddPage(pageInput);
 
             return this.Redirect("~/Administration/Site/GetAllPages");
@@ -69,6 +98,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> DeletePage(string id)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             await this.pageService.DeletePage(id);
 
             return this.Redirect("~/Administration/Site/GetAllPages");
@@ -77,17 +111,32 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> EditSlide(int id)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             return this.View();
         }
 
         [HttpPost]
         public async Task<IActionResult> EditSlide()
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             return this.View();
         }
 
         public async Task<IActionResult> Setings()
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             List<SetingViewModel> setings = this.settingsService.GetAll().ToList();
             this.ViewData["SetingsList"] = setings;
 
@@ -98,6 +147,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> EditSeting(SetingsInputModel setingsInputModel)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("/");
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.Redirect("Setings");

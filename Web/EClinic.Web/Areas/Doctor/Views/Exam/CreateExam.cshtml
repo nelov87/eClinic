@@ -1,0 +1,77 @@
+﻿@model EClinic.Web.InputModels.Exams.CreateExamInputModel
+@{
+    ViewData["Title"] = "Create Exam";
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Create Exam</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="Index">Home</a></li>
+                    <li><i class="fa fa-file-text-o"></i><a asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="ShowAllExams">Exams</a></li>
+                    <li><i class="fa fa-file-text-o"></i>Create Exam</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        CreatePage
+                    </header>
+                    <div class="panel-body">
+                        <form class="form-horizontal" asp-action="CreateEcam" method="post" id="page-details">
+                            <input type="hidden" asp-for="@Model.DoctorUserName" value="@this.User.Identity.Name" />
+                        </form>
+
+                        <div class="row">
+                            <div class="col-sm-2 control-label">
+                                <label style="float:right">@Html.DisplayNameFor(model => model.Condition):</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <span asp-validation-for="@Model.Condition" class="text-danger"></span>
+                                <textarea class="ckeditor" name="Condition" form="page-details"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 control-label">
+                                <label style="float:right">@Html.DisplayNameFor(model => model.Diagnose):</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <span asp-validation-for="@Model.Diagnose" class="text-danger"></span>
+                                <textarea class="ckeditor" name="Diagnose" form="page-details"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-2 control-label">
+                                <label style="float:right">@Html.DisplayNameFor(model => model.Prescription):</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <span asp-validation-for="@Model.Prescription" class="text-danger"></span>
+                                <textarea class="ckeditor" name="Prescription" form="page-details"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="button-holder d-flex pull-right">
+                                    <button type="submit" class="btn btn-success" form="page-details">Save</button>
+                                    <a class="btn btn-danger" asp-area="Doctor" asp-controller="Exam" asp-action="ShowAllExams">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <partial name="Partials/_ValidationScriptsPartial" />
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->

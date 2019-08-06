@@ -1,0 +1,93 @@
+﻿@model EClinic.Web.ViewModels.Administration.EditUserViewModel
+@{
+    ViewData["Title"] = "User Info";
+    SelectList listItems = (SelectList)ViewData["Roles"];
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> User Info</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="Index">Home</a></li>
+                    <li><i class="fa fa-file-text-o"></i><a asp-area="Doctor" asp-controller="Users" asp-action="GetAllUsers">Users</a></li>
+                    <li><i class="fa fa-file-text-o"></i>Edit User</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h3 style="padding-top:1%; padding-bottom:3%;">Edit User: <strong>@Model.FirstName @Model.LastName</strong></h3>
+                    </header>
+                    <header class="panel-heading tab-bg-info">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a data-toggle="tab" href="#profile">
+                                    <i class="icon-user"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            
+                            
+                        </ul>
+                    </header>
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <!-- profile -->
+                            <div id="profile" class="tab-pane active">
+                                <section class="panel">
+                                    <div class="panel-body bio-graph-info">
+                                        <h1>Bio Graph</h1>
+                                        <div class="row">
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.FirstName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.FirstName)) </p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.MiddleName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.MiddleName))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.LastName)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.LastName))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.Age)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Age.ToString()))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.Address)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Address))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.Email)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Email))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p><span>@Html.DisplayNameFor(x => x.CreatedOn)</span>: @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.CreatedOn.ToString()))</p>
+                                            </div>
+                                            <div class="bio-row">
+                                                <p>
+                                                    <span>@Html.DisplayNameFor(x => x.UserRoles)</span>:
+                                                    @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(String.Join(", ", @Model.UserRoles)))
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                    <div class="row">
+                                    </div>
+                                </section>
+                            </div>
+                            <!-- edit-profile -->
+                            
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <partial name="Partials/_ValidationScriptsPartial" />
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->

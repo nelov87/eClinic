@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using EClinic.Data.Models;
 using EClinic.Common;
+using EClinic.Web.ViewModels.Administration;
 
 namespace EClinic.Services.Administration
 {
@@ -23,18 +24,20 @@ namespace EClinic.Services.Administration
             this.userManager = userManager;
         }
 
-        public async Task<ICollection<DoctorNameAndIdViewModel>> GetAllDoctorsNames()
+        public async Task<ICollection<DoctorNameAndUserNameViewModel>> GetAllDoctorsNames()
         {
             var doctorsDb = await this.userManager.GetUsersInRoleAsync(GlobalConstants.DoctorRoleName);
 
-            var doctors = doctorsDb.Select(d => new DoctorNameAndIdViewModel()
+            var doctors = doctorsDb.Select(d => new DoctorNameAndUserNameViewModel()
             {
-                Id = d.Id,
+                UserName = d.UserName,
                 Name = $"{d.FirstName} {d.LastName}"
             }).ToList();
 
             return doctors;
         }
+
+        
 
         
     }

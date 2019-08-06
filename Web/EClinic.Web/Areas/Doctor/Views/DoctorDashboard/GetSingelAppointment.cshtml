@@ -1,0 +1,43 @@
+﻿@model EClinic.Web.ViewModels.Appointments.DoctorGetAllAppointmentsFullViewModel
+@{
+    ViewData["Title"] = "View Appointment";
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-file-text-o"></i> Appointment for @Model.PatientName</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="Index">Home</a></li>
+
+                    <li><i class="fa fa-file-text-o"></i>View Appointment</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Form Elements
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 txtr">
+                                <p><strong>Name: </strong>@Model.PatientName</p>
+                                <p><strong>Date: </strong>@Model.AppointmentDateTime.ToString("dd-MM-yyyy")</p>
+                                <p><strong>Hour: </strong>@Model.AppointmentDateTime.ToString("hh:mm")</p>
+                                <p><strong>Doctor: </strong>@Model.DoctorName</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+        <partial name="Partials/_ValidationScriptsPartial" />
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->

@@ -9,15 +9,22 @@ namespace EClinic.Services.FrontEnd
 {
     public interface IAppointmentService
     {
-        Task<ICollection<AppointmentGetAllViewModel>> GetAllAppointsmentForDoctor(string id);
+        //Task<ICollection<AppointmentGetAllViewModel>> GetAllAppointsmentForDoctorDates(string id);
 
 
-        Task<ICollection<AppointmentViewModel>> GetAll();
+        Task<ICollection<GetAllAppointmentFullProperties>> GetAll();
 
-        Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentForDoctorForDay(string doctorid, DateTime date);
+        Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentDatesForDoctorForDay(string doctorid, DateTime date);
 
         Task<bool> CreateAppointment( string patientId, string doctorId, DateTime date);
 
-        Task<GetSuccsesAppointmentViewModel> ShowSingelAppointment(string userName);
+        Task<GetSuccsesAppointmentViewModel> ShowLastAppointmentForUser(string userName);
+
+        Task<ICollection<DoctorGetAllAppointmentsFullViewModel>> GetAppointmentsForDoctorFull(string doctorUserName);
+
+        Task<DoctorGetAllAppointmentsFullViewModel> ShowSingelAppointment(string appointmentId);
+
+        Task<bool> DeleteAppointment(string appointmentId);
+
     }
 }

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EClinic.Common;
 using EClinic.Services.Administration;
 using EClinic.Web.ViewModels.Administration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace EClinic.Web.Areas.Administration.Controllers
+namespace EClinic.Web.Areas.Doctor.Controllers
 {
-    [Authorize]
-    [Area("Administration")]
-    public class UsersController : Controller
+    
+    public class UsersController : DoctorController
     {
         private readonly IUsersService usersService;
 
@@ -32,6 +32,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUser(string email)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("GetAllUsers");
+            }
+
             var user = await this.usersService.GetUser(email);
             var listItems = await this.usersService.GetAllRoles();
             SelectList selectLists = new SelectList(listItems);
@@ -45,6 +50,11 @@ namespace EClinic.Web.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel viewModel)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("GetAllUsers");
+            }
+
             await this.usersService.EditUser(viewModel);
             
 
@@ -53,9 +63,20 @@ namespace EClinic.Web.Areas.Administration.Controllers
 
         public async Task<IActionResult> DeleteUser(string email)
         {
+            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.Redirect("GetAllUsers");
+            }
             await this.usersService.DeleteUser(email);
 
             return this.Redirect("GetAllUsers");
+        }
+
+        public async Task<IActionResult> GetUserInfo(string email)
+        {
+            var user = await this.usersService.GetUser(email);
+
+            return this.View(user);
         }
     }
 }

@@ -3,277 +3,294 @@
     ViewData["Title"] = "ShowMont";
 }
 
+
 <style>
-    /**
- * ALL the UI design credit goes to:
- * https://www.sketchappsources.com/free-source/2676-calendar-template-sketch-freebie-resource.html
- */
+       /**
+    * ALL the UI design credit goes to:
+    * https://www.sketchappsources.com/free-source/2676-calendar-template-sketch-freebie-resource.html
+    */
 
 
-/* WRAPPER */
+       /* WRAPPER */
 
-.wrapper {
-  display: grid;
-  grid-template-rows: 70px 1fr 70px;
-  grid-template-columns: 1fr;
-  grid-template-areas: "sidebar"
-                       "content";
-  width: 100vw; /* unnecessary, but let's keep things consistent */
-  height: 100vh;
-}
+       .wrapper {
+           display: grid;
+           grid-template-rows: 70px 1fr 70px;
+           grid-template-columns: 1fr;
+           grid-template-areas: "sidebar" "content";
+           width: 100vw; /* unnecessary, but let's keep things consistent */
+           height: 100vh;
+       }
 
-@@media screen and (min-width: 850px) {
-  .wrapper {
-    grid-template-columns: 200px 5fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "sidebar content";
-  }
-}
-
-
-
-/* SIDEBAR */
-
-main {
-  grid-area: content;
-  padding: 48px;
-}
-
-sidebar {
-  grid-area: sidebar;
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 3fr 1fr;
-  grid-template-areas: "logo menu avatar"
-                       "copyright menu avatar";
-}
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.copyright {
-  text-align: center;
-}
-.avatar {
-  grid-area: avatar;
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-}
-.avatar__name {
-  flex: 1;
-  text-align: right;
-  margin-right: 1em;
-}
-.avatar__img > img {
-  display: block;
-}
-
-.copyright {
-  grid-area: copyright;
-}
-.menu {
-  grid-area: menu;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-}
-.logo {
-  grid-area: logo;
-}
-.menu__text {
-  display: none;
-}
-
-@@media screen and (min-width: 850px) {
-  sidebar {
-    grid-template-areas: "logo"
-                         "avatar"
-                         "menu"
-                         "copyright";
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px auto 1fr 50px;
-  }
-  
-  .menu {
-    flex-direction: column;
-    align-items: normal;
-    justify-content: flex-start;
-  }
-  .menu__text {
-    display: inline-block;
-  }
-  .avatar {
-    flex-direction: column;
-  }
-  .avatar__name {
-    margin: 1em 0;
-  }
-  .avatar__img > img {
-    border-radius: 50%;
-  }
-}
+       @@media screen and (min-width: 850px) {
+           .wrapper {
+               grid-template-columns: 200px 5fr;
+               grid-template-rows: 1fr;
+               grid-template-areas: "sidebar content";
+           }
+       }
 
 
 
+       /* SIDEBAR */
 
-/* MAIN */
+       main {
+           grid-area: content;
+           padding: 48px;
+       }
 
-.toolbar{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-.calendar{}
+       sidebar {
+           grid-area: sidebar;
+           display: grid;
+           grid-template-columns: 1fr 3fr 1fr;
+           grid-template-rows: 3fr 1fr;
+           grid-template-areas: "logo menu avatar" "copyright menu avatar";
+       }
 
-.calendar__week,
-.calendar__header {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);  
-}
-.calendar__week {
-  grid-auto-rows: 100px;
-  text-align: right;
-}
+       .logo {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+       }
 
-.calendar__header {
-  grid-auto-rows: 50px;
-  align-items: center;
-  text-align: center;
-}
+       .copyright {
+           text-align: center;
+       }
 
-.calendar__day {
-  padding: 16px;
-}
+       .avatar {
+           grid-area: avatar;
+           display: flex;
+           align-items: center;
+           flex-direction: row-reverse;
+       }
+
+       .avatar__name {
+           flex: 1;
+           text-align: right;
+           margin-right: 1em;
+       }
+
+       .avatar__img > img {
+           display: block;
+       }
+
+       .copyright {
+           grid-area: copyright;
+       }
+
+       .menu {
+           grid-area: menu;
+           display: flex;
+           align-items: center;
+           justify-content: space-evenly;
+       }
+
+       .logo {
+           grid-area: logo;
+       }
+
+       .menu__text {
+           display: none;
+       }
+
+       @@media screen and (min-width: 850px) {
+           sidebar {
+               grid-template-areas: "logo" "avatar" "menu" "copyright";
+               grid-template-columns: 1fr;
+               grid-template-rows: 50px auto 1fr 50px;
+           }
+
+           .menu {
+               flex-direction: column;
+               align-items: normal;
+               justify-content: flex-start;
+           }
+
+           .menu__text {
+               display: inline-block;
+           }
+
+           .avatar {
+               flex-direction: column;
+           }
+
+           .avatar__name {
+               margin: 1em 0;
+           }
+
+           .avatar__img > img {
+               border-radius: 50%;
+           }
+       }
 
 
 
 
-/* COSMETIC STYLING */
+       /* MAIN */
 
-:root {
-  --red: #ED5454;
-}
+       .toolbar {
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           margin-bottom: 24px;
+       }
 
-body {
-  font-family: Montserrat;
-  font-weight: 100;
-  
-}
+       .calendar {
+       }
 
-sidebar {
-  background-color: white;
-  box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
-}
+       .calendar__week,
+       .calendar__header {
+           display: grid;
+           grid-template-columns: repeat(7, 1fr);
+       }
 
-main {
-  background-color: #FFF;
-}
+       .calendar__week {
+           grid-auto-rows: 100px;
+           text-align: right;
+       }
 
-.avatar__name {
-  font-size: 0.8rem;
-}
+       .calendar__header {
+           grid-auto-rows: 50px;
+           align-items: center;
+           text-align: center;
+       }
 
-.menu__item {
-  text-transform: uppercase;
-  font-size: 0.7rem;
-  font-weight: 500;
-  padding: 16px 16px 16px 14px;
-  border-left: 4px solid transparent;
-  color: inherit;
-  text-decoration: none;
-  transition: color ease 0.3s;
-}
-
-.menu__item--active .menu__icon {
-  color: var(--red);
-}
-.menu__item--active .menu__text {
-  color: black;
-}
-
-.menu__item:hover {
-  color: black;
-}
+       .calendar__day {
+           padding: 16px;
+       }
 
 
-.menu__icon {
-  font-size: 1.3rem;
-}
 
-@@media screen and (min-width: 850px) {
-  .menu__icon {
-    font-size: 0.9rem;
-    padding-right: 16px;
-  }
-  .menu__item--active {
-    border-left: 4px solid var(--red);
-    box-shadow: inset 10px 0px 17px -13px var(--red);
-  }
-}
 
-.copyright {
-  font-size: 0.7rem;
-  font-weight: 400;
-}
+       /* COSMETIC STYLING */
 
-.calendar {
-  background-color: white;
-  border: 1px solid #e1e1e1;
-}
+       :root {
+           --red: #ED5454;
+       }
 
-.calendar__header > div {
-  text-transform: uppercase;
-  font-size: 0.8em;
-  font-weight: bold;
-}
+       body {
+           font-family: Montserrat;
+           font-weight: 100;
+       }
 
-.calendar__day_Full {
-  border-right: 1px solid #e1e1e1;
-  border-top: 1px solid #e1e1e1;
-  background-color:#FFAAAA;
-}.calendar__day {
-  border-right: 1px solid #e1e1e1;
-  border-top: 1px solid #e1e1e1;
-  background-color:#BAE5C6;
-}
+       sidebar {
+           background-color: white;
+           box-shadow: 5px 0px 20px rgba(0, 0, 0, 0.2);
+       }
 
-.calendar__day:last-child {
-  border-right: 0;
-}
+       main {
+           background-color: #FFF;
+       }
 
-.toggle{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+       .avatar__name {
+           font-size: 0.8rem;
+       }
 
-  text-align: center;
-  font-size: 0.9em;
-}
-.toggle__option{
-  padding: 16px;
-  border: 1px solid #e1e1e1;
-  border-radius: 8px;
-  text-transform: capitalize;
-  cursor: pointer;
-}
-.toggle__option:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.toggle__option:last-child {
-    border-left: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.toggle__option--selected{
-  border-color: white;
-  background-color: white;
-  color: var(--red);
-  font-weight: 500;
-  box-shadow: 1px 2px 30px -5px var(--red);
-}
+       .menu__item {
+           text-transform: uppercase;
+           font-size: 0.7rem;
+           font-weight: 500;
+           padding: 16px 16px 16px 14px;
+           border-left: 4px solid transparent;
+           color: inherit;
+           text-decoration: none;
+           transition: color ease 0.3s;
+       }
+
+       .menu__item--active .menu__icon {
+           color: var(--red);
+       }
+
+       .menu__item--active .menu__text {
+           color: black;
+       }
+
+       .menu__item:hover {
+           color: black;
+       }
+
+
+       .menu__icon {
+           font-size: 1.3rem;
+       }
+
+       @@media screen and (min-width: 850px) {
+           .menu__icon {
+               font-size: 0.9rem;
+               padding-right: 16px;
+           }
+
+           .menu__item--active {
+               border-left: 4px solid var(--red);
+               box-shadow: inset 10px 0px 17px -13px var(--red);
+           }
+       }
+
+       .copyright {
+           font-size: 0.7rem;
+           font-weight: 400;
+       }
+
+       .calendar {
+           background-color: white;
+           border: 1px solid #e1e1e1;
+       }
+
+       .calendar__header > div {
+           text-transform: uppercase;
+           font-size: 0.8em;
+           font-weight: bold;
+       }
+
+       .calendar__day_Full {
+           border-right: 1px solid #e1e1e1;
+           border-top: 1px solid #e1e1e1;
+           background-color: #FFAAAA;
+       }
+
+       .calendar__day {
+           border-right: 1px solid #e1e1e1;
+           border-top: 1px solid #e1e1e1;
+           background-color: #BAE5C6;
+       }
+
+           .calendar__day:last-child {
+               border-right: 0;
+           }
+
+       .toggle {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           text-align: center;
+           font-size: 0.9em;
+       }
+
+       .toggle__option {
+           padding: 16px;
+           border: 1px solid #e1e1e1;
+           border-radius: 8px;
+           text-transform: capitalize;
+           cursor: pointer;
+       }
+
+           .toggle__option:first-child {
+               border-top-right-radius: 0;
+               border-bottom-right-radius: 0;
+           }
+
+           .toggle__option:last-child {
+               border-left: 0;
+               border-top-left-radius: 0;
+               border-bottom-left-radius: 0;
+           }
+
+       .toggle__option--selected {
+           border-color: white;
+           background-color: white;
+           color: var(--red);
+           font-weight: 500;
+           box-shadow: 1px 2px 30px -5px var(--red);
+       }
 </style>
 
 <!--  ************************* Page Title Starts Here ************************** -->
@@ -293,48 +310,45 @@ main {
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 txtr">
-                
+
                 @{
                     int month = (int)ViewData["Month"];
                     var monthDays = DateTime.DaysInMonth(DateTime.UtcNow.Year, 8);
                 }
 
 
-                    <main>
-                        <div class="toolbar">
-                            <div class="current-month"><a asp-action="ShowMonth" asp-route-previousNext="previous">Previous motht</a></div>
-                            <div class="current-month">@DateTime.Parse($"01/{ViewData["Month"]}/{DateTime.Now.Year}").ToString("MMMM")</div>
-                            <div class="current-month"><a asp-action="ShowMonth" asp-route-previousNext="next">Next motht</a></div>
-
+                <main>
+                    <div class="toolbar">
+                        <div class="current-month">@DateTime.Parse($"01/{month}/{DateTime.Now.Year}").ToString("MMMM")</div>
+                    </div>
+                    <div class="calendar">
+                        <div class="calendar__header">
+                            <div>mon</div>
+                            <div>tue</div>
+                            <div>wed</div>
+                            <div>thu</div>
+                            <div>fri</div>
+                            <div>sat</div>
+                            <div>sun</div>
                         </div>
-                        <div class="calendar">
-                            <div class="calendar__header">
-                                <div>mon</div>
-                                <div>tue</div>
-                                <div>wed</div>
-                                <div>thu</div>
-                                <div>fri</div>
-                                <div>sat</div>
-                                <div>sun</div>
+
+                        @for (var day = 1; day <= monthDays;)
+                        {
+                            <div class="calendar__week">
+                                @for (var dayOfWeek = 0; dayOfWeek < 7 && day <= monthDays; dayOfWeek++)
+                                {
+                                    <div class="calendar__day day">@day <div class="inline-flex text-white"><a class="btn btn-info btn-sm" asp-controller="Appointment" asp-action="ShowDay" asp-route-day="@day" asp-route-month="@month" asp-route-doctorUsername="@ViewData["Doctor"]">Choose day</a></div></div>
+
+                                    day++;
+                                }
                             </div>
+                        }
 
-                            @for (var day = 1; day <= monthDays;)
-                             {
-                                 <div class="calendar__week">
-                                     @for (var dayOfWeek = 0; dayOfWeek < 7 && day <= monthDays; dayOfWeek++)
-                                     {
-                                         <div class="calendar__day day">@day <div class="inline-flex text-white"><a class="btn btn-info btn-sm" asp-controller="Appointment" asp-action="ShowDay" asp-route-day="@day" asp-route-month="@month" asp-route-doctor="@ViewData["Doctor"]">Choose day</a></div></div>
-                                         
-                                         day++;
-                                     }
-                                </div>
-                             }
 
-                            
-                        </div>
-                    </main>
-                    
-                
+                    </div>
+                </main>
+
+
             </div>
         </div>
     </div>

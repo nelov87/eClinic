@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Home</a></li>
+                    <li><i class="fa fa-home"></i><a asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="Index">Home</a></li>
                     <li><i class="icon_document_alt"></i>Users</li>
                     <li><i class="fa fa-file-text-o"></i>All Users</li>
                 </ol>
@@ -55,8 +55,12 @@
 
                                     <td>
                                         <div class="btn-group">
-                                            <a asp-area="Administration" asp-controller="Users" asp-action="EditUser" asp-route-email="@user.Email" class="btn btn-primary"><i class="icon_pencil-edit_alt"></i></a>
-                                            <a class="btn btn-danger"asp-area="Administration" asp-controller="Users"  asp-action="DeleteUser" asp-route-email="@user.Email"><i class="icon_close_alt2"></i></a>
+                                            <a asp-area="Doctor" asp-controller="Users" asp-action="GetUserInfo" asp-route-email="@user.Email" class="btn btn-info"><i class="icon_info"></i></a>
+                                            @if (this.User.IsInRole("Administrator"))
+                                            {
+                                                <a asp-area="Doctor" asp-controller="Users" asp-action="EditUser" asp-route-email="@user.Email" class="btn btn-primary"><i class="icon_pencil-edit_alt"></i></a>
+                                                <a class="btn btn-danger" asp-area="Doctor" asp-controller="Users" asp-action="DeleteUser" asp-route-email="@user.Email"><i class="icon_close_alt2"></i></a>
+                                            }
                                         </div>
                                     </td>
                                 </tr>

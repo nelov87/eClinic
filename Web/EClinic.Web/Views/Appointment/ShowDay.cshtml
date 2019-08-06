@@ -34,7 +34,7 @@
                                     }
                                     else
                                     {
-                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctor="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
+                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
                                     }
                                     
                                     @{minuts = 30;}
@@ -50,7 +50,7 @@
                                     }
                                     else
                                     {
-                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctor="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
+                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
                                     }
                                     
                                     @{minuts = 30;}

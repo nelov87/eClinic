@@ -8,6 +8,6 @@ namespace EClinic.Services.Administration
 {
     public interface IDoctorService
     {
-        Task<ICollection<DoctorNameAndIdViewModel>> GetAllDoctorsNames();
+        Task<ICollection<DoctorNameAndUserNameViewModel>> GetAllDoctorsNames();
     }
 }

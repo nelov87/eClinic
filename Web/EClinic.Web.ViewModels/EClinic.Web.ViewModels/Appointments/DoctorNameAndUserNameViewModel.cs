@@ -5,9 +5,10 @@ using System.Text;
 
 namespace EClinic.Web.ViewModels.Appointments
 {
-    public class DoctorNameAndIdViewModel
+    public class DoctorNameAndUserNameViewModel
     {
-        public string Id { get; set; }
+        [DisplayName("Username")]
+        public string UserName { get; set; }
 
         [DisplayName("Doctor")]
         public string Name { get; set; }

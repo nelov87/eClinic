@@ -20,47 +20,36 @@ namespace EClinic.Services.FrontEnd
             this.db = db;
         }
 
-        public async Task<ICollection<AppointmentViewModel>> GetAll()
+        public async Task<ICollection<GetAllAppointmentFullProperties>> GetAll()
         {
-            var appointments = this.db.Appointments.Select(x => new AppointmentViewModel()
+            var appointments = this.db.Appointments.Select(x => new GetAllAppointmentFullProperties()
             {
-                AppointmentDadeTime = x.AppointmentDateTime,
+                AppointmentDateTime = x.AppointmentDateTime,
                 CreatedOn = x.CreatedOn,
-                DoctorName = $"{this.db.Users.FirstOrDefault(d => d.Id == x.Id).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == x.Id).LastName}",
-                Patient = $"{this.db.Users.FirstOrDefault(u => u.Id == x.Id).FirstName} {this.db.Users.FirstOrDefault(u => u.Id == x.Id).LastName}"
+                DoctorName = $"{this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).LastName}",
+                PatientName = $"{this.db.Users.FirstOrDefault(u => u.Id == x.PatientId).FirstName} {this.db.Users.FirstOrDefault(u => u.Id == x.PatientId).LastName}"
             })
                 .ToList();
 
             return appointments;
         }
 
-        public async Task<ICollection<AppointmentGetAllViewModel>> GetAllAppointsmentForDoctor(string id)
+        
+        public async Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentDatesForDoctorForDay(string doctorUserName, DateTime date)
         {
-            var appointments = this.db.Appointments
-                .Where(a => a.DoctorId == id)
-                .To<AppointmentGetAllViewModel>().ToList();
+            var doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
 
-            return appointments;
-        }
-
-        public async Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentForDoctorForDay(string doctorid, DateTime date)
-        {
             var appointments = this.db.Appointments
-                .Where(a => a.DoctorId == doctorid && a.AppointmentDateTime.Month == date.Month && a.AppointmentDateTime.Day == date.Day)
+                .Where(a => a.DoctorId == doctorId && a.AppointmentDateTime.Month == date.Month && a.AppointmentDateTime.Day == date.Day)
                 .To<AppointmentGetAllForDayViewModel>().ToList();
 
-            //foreach (var item in appointments)
-            //{
-            //    var a = item.AppointmentDateTime.Month;
-
-            //    var b = item.AppointmentDateTime.Day;
-            //}
-
+            
             return appointments;
         }
 
-        public async Task<bool> CreateAppointment( string patientUsername, string doctorId, DateTime date)
+        public async Task<bool> CreateAppointment( string patientUsername, string doctorUserName, DateTime date)
         {
+            var doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
             var patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUsername).Id;
 
             var appointmentToAdd = new Appointment()
@@ -83,7 +72,7 @@ namespace EClinic.Services.FrontEnd
             return false;
         }
 
-        public async Task<GetSuccsesAppointmentViewModel> ShowSingelAppointment(string userName)
+        public async Task<GetSuccsesAppointmentViewModel> ShowLastAppointmentForUser(string userName)
         {
 
             var appoitment = this.db.Appointments.Where(x => x.Patient.UserName == userName).OrderByDescending(x => x.CreatedOn).Take(1).FirstOrDefault(x => true);
@@ -99,6 +88,61 @@ namespace EClinic.Services.FrontEnd
             };
 
             return appointmentToReturn;
+        }
+
+        public async Task<ICollection<DoctorGetAllAppointmentsFullViewModel>> GetAppointmentsForDoctorFull(string doctorUserName)
+        {
+            ICollection<DoctorGetAllAppointmentsFullViewModel> appointments = new List<DoctorGetAllAppointmentsFullViewModel>();
+
+            string doctorId = this.db.Users.FirstOrDefault(u => u.UserName == doctorUserName).Id;
+
+            appointments = this.db.Appointments.Where(a => a.DoctorId == doctorId).Select(x => new DoctorGetAllAppointmentsFullViewModel()
+            {
+                Id = x.Id,
+                PatientId = x.PatientId,
+                DoctorId = x.DoctorId,
+                AppointmentDateTime = x.AppointmentDateTime,
+                CreatedOn = x.CreatedOn,
+                DoctorName = $"{this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).LastName}",
+                PatientName = $"{this.db.Users.FirstOrDefault(d => d.Id == x.PatientId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == x.PatientId).LastName}"
+            }).ToList();
+            return appointments;
+            
+        }
+
+        public async Task<DoctorGetAllAppointmentsFullViewModel> ShowSingelAppointment(string appointmentId)
+        {
+            var appointmentDb = this.db.Appointments
+                .FirstOrDefault(a => a.Id == appointmentId);
+
+            var appointment = new DoctorGetAllAppointmentsFullViewModel()
+            {
+                Id = appointmentDb.Id,
+                DoctorId = appointmentDb.DoctorId,
+                PatientId = appointmentDb.PatientId,
+                AppointmentDateTime = appointmentDb.AppointmentDateTime,
+                CreatedOn = appointmentDb.CreatedOn,
+                DoctorName = $"{this.db.Users.FirstOrDefault(d => d.Id == appointmentDb.DoctorId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == appointmentDb.DoctorId).LastName}",
+                PatientName = $"{this.db.Users.FirstOrDefault(d => d.Id == appointmentDb.PatientId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == appointmentDb.PatientId).LastName}"
+            };
+
+            return appointment;
+        }
+
+        public async Task<bool> DeleteAppointment(string appointmentId)
+        {
+            var appointment = this.db.Appointments.FirstOrDefault(a => a.Id == appointmentId);
+
+            this.db.Appointments.Remove(appointment);
+
+            int result = this.db.SaveChanges();
+
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

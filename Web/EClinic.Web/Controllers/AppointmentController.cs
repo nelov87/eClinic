@@ -29,41 +29,31 @@ namespace EClinic.Web.Controllers
             return this.View(doctors);
         }
 
-        public async Task<IActionResult> ShowMonth(string id, string previousNext)
+        public IActionResult ShowMonth(string userName)
         {
             var date = DateTime.UtcNow;
-            int month = DateTime.UtcNow.Month;
+            int monthnow = DateTime.UtcNow.Month;
 
-            this.ViewData["Doctor"] = id;
-
-            if (previousNext == "previous")
-            {
-                month = date.AddMonths(-1).Month;
-            }
-            else if (previousNext == "next")
-            {
-                month = date.AddMonths(1).Month;
-            }
+            this.ViewData["Doctor"] = userName;
+            this.ViewData["Month"] = monthnow;
             
-                this.ViewData["Month"] = month;
-
             return View();
         }
 
-        public async Task<IActionResult> ShowDay(int day, int month, string doctor)
+        public async Task<IActionResult> ShowDay(int day, int month, string doctorUsername)
         {
-            this.ViewData["Doctor"] = doctor;
+            this.ViewData["Doctor"] = doctorUsername;
             this.ViewData["Day"] = day;
             this.ViewData["Month"] = month;
 
             var dateOfApointment = new DateTime(DateTime.UtcNow.Year, month, day);
 
-            var appointments = await this.appointmentService.GetAllAppointsmentForDoctorForDay(doctor, dateOfApointment);
+            var appointments = await this.appointmentService.GetAllAppointsmentDatesForDoctorForDay(doctorUsername, dateOfApointment);
             
             return this.View(appointments);
         }
 
-        public async Task<IActionResult> CreateAppointment(string userName, string doctor, DateTime date)
+        public async Task<IActionResult> CreateAppointment(string userName, string doctorUsername, DateTime date)
         {
             //{ 01 - Jan - 01 12:00:00 AM}
             if (date == DateTime.MinValue)
@@ -71,7 +61,7 @@ namespace EClinic.Web.Controllers
                 return this.Redirect("ShowMonth");
             }
 
-            await this.appointmentService.CreateAppointment(userName, doctor, date);
+            await this.appointmentService.CreateAppointment(userName, doctorUsername, date);
            
             return this.Redirect("ShowSuccesAppointment");
         }
@@ -79,9 +69,12 @@ namespace EClinic.Web.Controllers
         public async Task<IActionResult> ShowSuccesAppointment()
         {
 
-            var appointment = await this.appointmentService.ShowSingelAppointment(this.User.Identity.Name);
+            var appointment = await this.appointmentService.ShowLastAppointmentForUser(this.User.Identity.Name);
 
             return this.View(appointment);
         }
+
+        
+        
     }
 }

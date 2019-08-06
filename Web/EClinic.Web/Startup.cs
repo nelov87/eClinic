@@ -23,8 +23,7 @@ using EClinic.Web.ViewModels.Site;
 using EClinic.Data.Seeding;
 using EClinic.Services.FrontEnd;
 using EClinic.Services.Administration;
-
-
+using EClinic.Services.Exams;
 
 namespace EClinic.Web
 {
@@ -78,6 +77,7 @@ namespace EClinic.Web
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<IAppointmentService, AppointmentService>();
             services.AddTransient<IDoctorService, DoctorService>();
+            services.AddTransient<IExamService, ExamService>();
 
 
             services.AddMvc(options => 

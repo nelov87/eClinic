@@ -13,7 +13,6 @@ namespace EClinic.Web.ViewModels.Administration
         public EditUserViewModel()
         {
             this.Exams = new HashSet<Exam>();
-            this.Prescriptions = new HashSet<Prescription>();
             this.UserRoles = new HashSet<string>();
         }
 
@@ -56,9 +55,6 @@ namespace EClinic.Web.ViewModels.Administration
         public string Address { get; set; }
 
         public ICollection<Exam> Exams { get; set; }
-
-        public ICollection<Prescription> Prescriptions { get; set; }
-
         
         [DisplayName("User Roles")]
         public ICollection<string> UserRoles { get; set; }
