@@ -24,6 +24,7 @@
                     <div class="panel-body">
                         <form class="form-horizontal" asp-action="CreateEcam" method="post" id="page-details">
                             <input type="hidden" asp-for="@Model.DoctorUserName" value="@this.User.Identity.Name" />
+                            <input type="hidden" asp-for="@Model.PatientUserName" value="@this.ViewData["PatientUserName"]" />
                         </form>
 
                         <div class="row">

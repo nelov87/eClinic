@@ -1,5 +1,6 @@
 ﻿using EClinic.Data.Models;
 using EClinic.Services.Mapping;
+using EClinic.Web.ViewModels.Exams;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ namespace EClinic.Web.ViewModels.Administration
     {
         public EditUserViewModel()
         {
-            this.Exams = new HashSet<Exam>();
+            this.Exams = new HashSet<SingelExamViewModel>();
             this.UserRoles = new HashSet<string>();
         }
 
@@ -54,7 +55,7 @@ namespace EClinic.Web.ViewModels.Administration
         [DisplayName("Address")]
         public string Address { get; set; }
 
-        public ICollection<Exam> Exams { get; set; }
+        public ICollection<SingelExamViewModel> Exams { get; set; }
         
         [DisplayName("User Roles")]
         public ICollection<string> UserRoles { get; set; }

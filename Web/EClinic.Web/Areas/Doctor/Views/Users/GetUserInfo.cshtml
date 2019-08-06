@@ -27,10 +27,15 @@
                             <li>
                                 <a data-toggle="tab" href="#profile">
                                     <i class="icon-user"></i>
-                                    Profile
+                                    Profile 
                                 </a>
                             </li>
-                            
+                            <li>
+                                <a data-toggle="tab" href="#exams">
+                                    <i class="icon-user"></i>
+                                    Exams
+                                </a>
+                            </li>
                             
                         </ul>
                     </header>
@@ -79,7 +84,27 @@
                                 </section>
                             </div>
                             <!-- edit-profile -->
-                            
+                            <!-- Exams Start -->
+                            <div id="exams" class="tab-pane">
+                                <div class="profile-activity">
+
+                                    @foreach (var exam in Model.Exams)
+                                    {
+                                        <div class="act-time">
+                                            <div class="activity-body act-in">
+                                                <span class="arrow"></span>
+                                                <div class="text">
+
+                                                    <p class="attribution"><strong>@exam.Date.ToString("dd-MMMM-yyyy")</strong>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Diagnose)) </p>
+                                                    <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Prescription))</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                            <!-- Exams End -->
                         </div>
                     </div>
                 </section>

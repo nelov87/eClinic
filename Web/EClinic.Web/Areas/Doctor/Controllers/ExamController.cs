@@ -18,8 +18,10 @@ namespace EClinic.Web.Areas.Doctor.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateExam()
+        public async Task<IActionResult> CreateExam(string email)
         {
+            this.ViewData["PatientUserName"] = email;
+
             return View();
         }
 

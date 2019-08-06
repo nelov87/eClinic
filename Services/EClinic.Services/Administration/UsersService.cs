@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EClinic.Common;
 using EClinic.Data;
 using EClinic.Data.Models;
+using EClinic.Services.Exams;
 using EClinic.Services.Mapping;
 using EClinic.Web.ViewModels.Administration;
 using Microsoft.AspNetCore.Identity;
@@ -19,11 +20,13 @@ namespace EClinic.Services.Administration
     {
         private readonly EClinicDbContext db;
         private readonly UserManager<EClinicUser> userManager;
+        private readonly IExamService examService;
 
-        public UsersService(EClinicDbContext db, UserManager<EClinicUser> userManager)
+        public UsersService(EClinicDbContext db, UserManager<EClinicUser> userManager, IExamService examService)
         {
             this.db = db;
             this.userManager = userManager;
+            this.examService = examService;
         }
 
         public async Task<List<UserViewModel>> GetAllUsers()
@@ -49,6 +52,8 @@ namespace EClinic.Services.Administration
 
             var roles = await userManager.GetRolesAsync(user);
 
+            var exams = await this.examService.GetAllExamForPatient(email);
+
             var userToReturnn = new EditUserViewModel()
             {
                 Address = user.Address,
@@ -58,7 +63,8 @@ namespace EClinic.Services.Administration
                 MiddleName = user.MiddleName,
                 LastName = user.LastName,
                 UserRoles = roles,
-                Email = user.Email
+                Email = user.Email,
+                Exams = exams
             };
 
             return userToReturnn;

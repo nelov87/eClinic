@@ -22,6 +22,8 @@ namespace EClinic.Web.InputModels.Exams
         public string Diagnose { get; set; }
 
         [Required]
+        [MinLength(5, ErrorMessage = "Condition must be atleest 5 charecters!")]
+        [MaxLength(1000, ErrorMessage = "Condition is longer than 200 charecters!")]
         [DisplayName("Prescription")]
         public string Prescription { get; set; }
 
@@ -29,5 +31,9 @@ namespace EClinic.Web.InputModels.Exams
         [Required]
         [DisplayName("Doctor Name")]
         public string DoctorUserName { get; set; }
+
+        [Required]
+        [DisplayName("Doctor Name")]
+        public string PatientUserName { get; set; }
     }
 }

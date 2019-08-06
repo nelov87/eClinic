@@ -28,6 +28,7 @@ namespace EClinic.Services.Exams
                 Date = DateTime.UtcNow,
                 Diagnose = examInputModel.Diagnose,
                 DoctorId = this.db.Users.FirstOrDefault(d => d.UserName == examInputModel.DoctorUserName).Id,
+                PatientId = this.db.Users.FirstOrDefault(p => p.UserName == examInputModel.PatientUserName).Id,
                 Prescription = examInputModel.Prescription
             };
 
@@ -48,9 +49,25 @@ namespace EClinic.Services.Exams
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName)
+        public async Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName)
         {
-            throw new NotImplementedException();
+            var patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUserName).Id;
+
+            var exams = this.db.Exams
+                .Where(e => e.PatientId == patientId)
+                .Select(e => new SingelExamViewModel()
+                {
+                    Condition = e.Condition,
+                    Date = e.Date,
+                    Diagnose = e.Diagnose,
+                    DoctorId = e.DoctorId,
+                    DoctorName = "",
+                    Id = e.Id,
+                    Prescription = e.Prescription
+                })
+                .ToList();
+
+            return exams;
         }
 
         public Task<ICollection<SingelExamViewModel>> GetAllExamsForDoctor(string doctorUsername)

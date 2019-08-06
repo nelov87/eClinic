@@ -61,9 +61,7 @@ namespace EClinic.Web.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            [Display(Name = "Username")]
-            public string Username { get; set; }
+            
 
             [Required]
             [MinLength(2, ErrorMessage = "First name must be aleest 2 charecters!")]
@@ -100,7 +98,7 @@ namespace EClinic.Web.Areas.Identity.Pages.Account
                 var isRoot = _userManager.Users.Any();
 
                 var user = new EClinicUser {
-                    UserName = Input.Username,
+                    UserName = Input.Email,
                     Address = Input.Address,
                     Age = Input.Age,
                     CreatedOn = DateTime.UtcNow,
