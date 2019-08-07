@@ -37,20 +37,42 @@ namespace EClinic.Services.FrontEnd
         
         public async Task<ICollection<AppointmentGetAllForDayViewModel>> GetAllAppointsmentDatesForDoctorForDay(string doctorUserName, DateTime date)
         {
-            var doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
+            var doctorId = "";
 
-            var appointments = this.db.Appointments
+            var appointments = new List<AppointmentGetAllForDayViewModel>();
+
+            try
+            {
+                doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
+
+                appointments = this.db.Appointments
                 .Where(a => a.DoctorId == doctorId && a.AppointmentDateTime.Month == date.Month && a.AppointmentDateTime.Day == date.Day)
                 .To<AppointmentGetAllForDayViewModel>().ToList();
+            }
+            catch(NullReferenceException e)
+            {
+                throw new ArgumentException("GetAllAppointsmentDatesForDoctorForDay Requires valid parameters");
+            }
 
-            
             return appointments;
         }
 
         public async Task<bool> CreateAppointment( string patientUsername, string doctorUserName, DateTime date)
         {
-            var doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
-            var patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUsername).Id;
+
+            var doctorId = "";
+            var patientId = "";
+
+            try
+            {
+                doctorId = this.db.Users.FirstOrDefault(x => x.UserName == doctorUserName).Id;
+                patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUsername).Id;
+            }
+            catch(NullReferenceException e)
+            {
+                throw new ArgumentException("CreateAppointment Requires valid parameter.");
+            }
+
 
             var appointmentToAdd = new Appointment()
             {
@@ -74,10 +96,21 @@ namespace EClinic.Services.FrontEnd
 
         public async Task<GetSuccsesAppointmentViewModel> ShowLastAppointmentForUser(string userName)
         {
+            Appointment appoitment = new Appointment();
+            EClinicUser doctor = new EClinicUser();
+            EClinicUser patient = new EClinicUser();
+            try
+            {
+                appoitment = this.db.Appointments.Where(x => x.Patient.UserName == userName).OrderByDescending(x => x.CreatedOn).Take(1).FirstOrDefault(x => true);
+                doctor = this.db.Users.FirstOrDefault(x => x.Id == appoitment.DoctorId);
+                patient = this.db.Users.FirstOrDefault(x => x.Id == appoitment.PatientId);
+            }
+            catch(Exception e)
+            {
+                throw new ArgumentException("ShowLastAppointmentForUser needs valid username");
+            }
 
-            var appoitment = this.db.Appointments.Where(x => x.Patient.UserName == userName).OrderByDescending(x => x.CreatedOn).Take(1).FirstOrDefault(x => true);
-            var doctor = this.db.Users.FirstOrDefault(x => x.Id == appoitment.DoctorId);
-            var patient = this.db.Users.FirstOrDefault(x => x.Id == appoitment.PatientId);
+            
 
             var appointmentToReturn = new GetSuccsesAppointmentViewModel()
             {

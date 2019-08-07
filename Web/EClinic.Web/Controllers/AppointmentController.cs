@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EClinic.Services.Administration;
 using EClinic.Services.FrontEnd;
+using EClinic.Web.ViewModels.Appointments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,21 +49,40 @@ namespace EClinic.Web.Controllers
 
             var dateOfApointment = new DateTime(DateTime.UtcNow.Year, month, day);
 
-            var appointments = await this.appointmentService.GetAllAppointsmentDatesForDoctorForDay(doctorUsername, dateOfApointment);
-            
+            ICollection<AppointmentGetAllForDayViewModel> appointments = new List<AppointmentGetAllForDayViewModel>();
+
+            try
+            {
+                appointments = await this.appointmentService.GetAllAppointsmentDatesForDoctorForDay(doctorUsername, dateOfApointment);
+
+            }
+            catch(ArgumentException ae)
+            {
+                return this.Redirect("ShowMonth");
+            }
+
             return this.View(appointments);
         }
 
         public async Task<IActionResult> CreateAppointment(string userName, string doctorUsername, DateTime date)
         {
             //{ 01 - Jan - 01 12:00:00 AM}
-            if (date == DateTime.MinValue)
+            if (date == DateTime.MinValue )
             {
                 return this.Redirect("ShowMonth");
             }
 
-            await this.appointmentService.CreateAppointment(userName, doctorUsername, date);
-           
+            try
+            {
+                await this.appointmentService.CreateAppointment(userName, doctorUsername, date);
+
+            }
+            catch(Exception e)
+            {
+                return this.Redirect("ShowMonth");
+            }
+
+
             return this.Redirect("ShowSuccesAppointment");
         }
 
