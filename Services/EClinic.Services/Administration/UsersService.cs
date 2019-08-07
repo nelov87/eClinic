@@ -100,7 +100,10 @@ namespace EClinic.Services.Administration
                 }
                 else
                 {
-                    await this.userManager.RemoveFromRoleAsync(user, role);
+                    if (user.Email != "nelov87@gmail.com" && role != "Administrator")
+                    {
+                        await this.userManager.RemoveFromRoleAsync(user, role);
+                    }
                 }
                 
             }

@@ -1,11 +1,13 @@
-﻿using System;
+﻿using EClinic.Data.Models;
+using EClinic.Services.Mapping;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
 namespace EClinic.Web.ViewModels.Exams
 {
-    public class SingelExamViewModel
+    public class SingelExamViewModel : IMapFrom<Exam>
     {
         
         public string Id { get; set; }

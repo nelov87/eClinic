@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Web.InputModels", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EClinic.Services.Mapping", "Services\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj", "{30802E7F-EACF-4D48-A598-048774276789}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EClinic.Tests", "EClinic.Tests", "{F6BABDAE-88D3-4892-860E-C51ED9A946FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EClinic.Service.Tests", "Tests\EClinic.Service.Tests\EClinic.Service.Tests.csproj", "{E901064E-D064-4FC3-B482-823B69890061}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,10 @@ Global
 		{30802E7F-EACF-4D48-A598-048774276789}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30802E7F-EACF-4D48-A598-048774276789}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30802E7F-EACF-4D48-A598-048774276789}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E901064E-D064-4FC3-B482-823B69890061}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E901064E-D064-4FC3-B482-823B69890061}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E901064E-D064-4FC3-B482-823B69890061}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E901064E-D064-4FC3-B482-823B69890061}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +86,7 @@ Global
 		{F5F9673B-3D57-4AC5-A5ED-BCCA371C900B} = {50BAC6DF-2D6F-4EA6-9ED4-30FF1FFF8611}
 		{5DA3D248-2222-486F-B08E-9FC3322C6FF1} = {EDB270CA-D593-4498-824F-11A1537393D8}
 		{30802E7F-EACF-4D48-A598-048774276789} = {50BAC6DF-2D6F-4EA6-9ED4-30FF1FFF8611}
+		{E901064E-D064-4FC3-B482-823B69890061} = {F6BABDAE-88D3-4892-860E-C51ED9A946FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {949A6EE5-2D35-421D-B995-AB1D911EB47C}

@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">@Html.DisplayNameFor(model => model.Title):</label>
                                 <div class="col-sm-10">
-                                    <input type="text" asp-for="Title" class="form-control" form="page-details" value="@pageViewModel.Title">
+                                    <input type="text" asp-for="Title" class="form-control" form="page-details" value="@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@pageViewModel.Title))">
                                     <span asp-validation-for="@Model.Title" class="text-danger"></span>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <label style="float:right">Content</label>
                             </div>
                             <div class="col-sm-10">
-                                <textarea class="ckeditor" name="content" form="page-details">@pageViewModel.Content</textarea>
+                                <textarea class="ckeditor" name="content" form="page-details">@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@pageViewModel.Content))</textarea>
                                 
                                 <div class="button-holder d-flex pull-right">
                                     <button type="submit" class="btn btn-success" form="page-details">Save</button>

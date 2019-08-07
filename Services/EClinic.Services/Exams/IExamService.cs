@@ -18,5 +18,8 @@ namespace EClinic.Services.Exams
         Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName);
 
         Task<bool> DeleteExam(string examId);
+
+        Task<bool> EditExam(ExamEditInputModel inputModel);
+
     }
 }

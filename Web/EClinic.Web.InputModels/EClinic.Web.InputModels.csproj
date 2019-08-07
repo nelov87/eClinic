@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\EClinic.Data.Models\EClinic.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Services\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj" />
+  </ItemGroup>
+
 </Project>

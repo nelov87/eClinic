@@ -30,7 +30,12 @@
                                     Edit User
                                 </a>
                             </li>
-                            
+                            <li>
+                                <a data-toggle="tab" href="#edit-exam">
+                                    <i class="icon-user"></i>
+                                    Edit Exam
+                                </a>
+                            </li>
                         </ul>
                     </header>
                     <div class="panel-body">
@@ -93,7 +98,6 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="form-group">
                                                 <div class="col-lg-offset-2 col-lg-10">
                                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -103,6 +107,58 @@
                                         </form>
                                     </div>
                                 </section>
+                            </div>
+                            <!--End Profile-->
+
+                            <!-- Start Exams -->
+                            <div id="edit-exam" class="tab-pane">
+                                <div class="profile-activity">
+
+                                    @if (Model.Exams.Count() != 0)
+                                    {
+                                        @foreach (var exam in Model.Exams)
+                                        {
+                                            <div class="act-time">
+                                                <div class="row">
+                                                    <div class="col-sm-10">
+                                                        <div class="activity-body act-in">
+                                                            <span class="arrow"></span>
+                                                            <div class="text">
+
+                                                                <p class="attribution"><strong>@exam.Date.ToString("dd-MMMM-yyyy")</strong></p>
+                                                                @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Condition))
+                                                                <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Diagnose))</p>
+                                                                <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Prescription))</p>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <div class="btn-group"><a class="btn btn-primary" asp-area="Doctor" asp-controller="Exam" asp-action="EditExam" asp-route-examId="@exam.Id"><i class="icon_pencil-edit_alt"></i></a></div>
+                                                        <div class="btn-group"><a class="btn btn-danger" asp-area="Doctor" asp-controller="Exam" asp-action="DeleteExam" asp-route-examId="@exam.Id"><i class="icon_close_alt2"></i></a></div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="act-time">
+                                    
+                                            <div class="activity-body act-in">
+                                                <span class="arrow"></span>
+                                                <div class="text">
+                                                    <strong>No Exams</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    
+                                    }
+
+                                </div>
+                                <!-- Edit Exams-->
                             </div>
                         </div>
                     </div>

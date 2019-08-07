@@ -7,6 +7,7 @@ using EClinic.Data;
 using EClinic.Data.Models;
 using EClinic.Web.InputModels.Exams;
 using EClinic.Web.ViewModels.Exams;
+using EClinic.Services.Mapping;
 
 namespace EClinic.Services.Exams
 {
@@ -44,9 +45,19 @@ namespace EClinic.Services.Exams
             return false;
         }
 
-        public Task<bool> DeleteExam(string examId)
+        public async Task<bool> DeleteExam(string examId)
         {
-            throw new NotImplementedException();
+            
+            this.db.Exams.Remove(this.db.Exams.FirstOrDefault(x => x.Id == examId));
+
+            int result = this.db.SaveChanges();
+
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName)
@@ -61,7 +72,7 @@ namespace EClinic.Services.Exams
                     Date = e.Date,
                     Diagnose = e.Diagnose,
                     DoctorId = e.DoctorId,
-                    DoctorName = "",
+                    DoctorName = $"{e.Doctor.FirstName} {e.Doctor.LastName}",
                     Id = e.Id,
                     Prescription = e.Prescription
                 })
@@ -75,9 +86,32 @@ namespace EClinic.Services.Exams
             throw new NotImplementedException();
         }
 
-        public Task<SingelExamViewModel> GetSingelExam(string examId)
+        public async Task<SingelExamViewModel> GetSingelExam(string examId)
         {
-            throw new NotImplementedException();
+            var exam = this.db.Exams
+                .To<SingelExamViewModel>()
+                .FirstOrDefault(e => e.Id == examId);
+                
+
+            return exam;
+        }
+
+        public async Task<bool> EditExam(ExamEditInputModel inputModel)
+        {
+            var examDb = this.db.Exams.FirstOrDefault(x => x.Id == inputModel.Id);
+
+            examDb.Condition = inputModel.Condition;
+            examDb.Diagnose = inputModel.Diagnose;
+            examDb.Prescription = inputModel.Prescription;
+
+            int result = this.db.SaveChanges();
+
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

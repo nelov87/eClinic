@@ -1,6 +1,7 @@
-﻿@model EClinic.Web.InputModels.Exams.CreateExamInputModel
+﻿@model EClinic.Web.InputModels.Exams.ExamEditInputModel
 @{
     ViewData["Title"] = "Create Exam";
+    var exam = (EClinic.Web.ViewModels.Exams.SingelExamViewModel)this.ViewBag.Exam;
 }
 
 <section id="main-content">
@@ -23,18 +24,17 @@
                     </header>
                     <div class="panel-body">
                         <div asp-validation-summary="All" class="text-danger"></div>
-                        <form class="form-horizontal" asp-action="CreateEcam" method="post" id="page-details">
-                            <input type="hidden" asp-for="@Model.DoctorUserName" value="@this.User.Identity.Name" />
-                            <input type="hidden" asp-for="@Model.PatientUserName" value="@this.ViewData["PatientUserName"]" />
-                        </form>
-
+                        <form class="form-horizontal" asp-area="Doctor" asp-controller="Exam" asp-action="EditExam" method="post" role="form" id="page-details"></form>
+                        <input type="hidden" name="Id" asp-for="@Model.Id" value="@Model.Id" form="page-details" />
+                        
+                        
                         <div class="row">
                             <div class="col-sm-2 control-label">
                                 <label style="float:right">@Html.DisplayNameFor(model => model.Condition):</label>
                             </div>
                             <div class="col-sm-10">
-                                <span asp-validation-for="@Model.Condition" class="text-danger"></span>
-                                <textarea class="ckeditor" name="Condition" form="page-details"></textarea>
+
+                                <textarea class="ckeditor" asp-for="@Model.Condition" name="Condition" form="page-details">@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(Model.Condition))</textarea>
                             </div>
                         </div>
 
@@ -43,8 +43,8 @@
                                 <label style="float:right">@Html.DisplayNameFor(model => model.Diagnose):</label>
                             </div>
                             <div class="col-sm-10">
-                                <span asp-validation-for="@Model.Diagnose" class="text-danger"></span>
-                                <textarea class="ckeditor" name="Diagnose" form="page-details"></textarea>
+
+                                <textarea class="ckeditor" asp-for="@Model.Diagnose" form="page-details">@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(Model.Diagnose))</textarea>
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@
                             </div>
                             <div class="col-sm-10">
                                 <span asp-validation-for="@Model.Prescription" class="text-danger"></span>
-                                <textarea class="ckeditor" name="Prescription" form="page-details"></textarea>
+                                <textarea class="ckeditor" asp-for="@Model.Prescription" name="Prescription" form="page-details">@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(Model.Prescription))</textarea>
                             </div>
                         </div>
 

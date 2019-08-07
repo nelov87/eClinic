@@ -95,7 +95,9 @@
                                                 <span class="arrow"></span>
                                                 <div class="text">
 
-                                                    <p class="attribution"><strong>@exam.Date.ToString("dd-MMMM-yyyy")</strong>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Diagnose)) </p>
+                                                    <p class="attribution"><strong>@exam.Date.ToString("dd-MMMM-yyyy")</strong></p>
+                                                    @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Condition))
+                                                    <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Diagnose))</p>
                                                     <p>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@exam.Prescription))</p>
                                                 </div>
                                             </div>
