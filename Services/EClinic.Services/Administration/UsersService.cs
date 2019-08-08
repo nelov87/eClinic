@@ -142,7 +142,23 @@ namespace EClinic.Services.Administration
 
         public async Task<bool> DeleteUser(string email)
         {
-            var user = await this.db.Users.FirstOrDefaultAsync(x => x.Email == email);
+            var user = new EClinicUser();
+
+            if (String.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentException("Delete User needs valid email");
+            }
+
+            try
+            {
+                user = await this.db.Users.FirstOrDefaultAsync(x => x.Email == email);
+
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Delete User needs valid email");
+            }
+
 
             if (user == null)
             {
