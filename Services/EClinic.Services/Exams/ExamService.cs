@@ -62,6 +62,8 @@ namespace EClinic.Services.Exams
 
         public async Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName)
         {
+            
+
             var patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUserName).Id;
 
             var exams = this.db.Exams

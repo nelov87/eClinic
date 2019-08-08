@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace EClinic.Web.Areas.Doctor.Controllers
 {
     
@@ -40,7 +41,17 @@ namespace EClinic.Web.Areas.Doctor.Controllers
                 return this.Redirect("GetAllUsers");
             }
 
-            var user = await this.usersService.GetUser(email);
+            EditUserViewModel user = new EditUserViewModel();
+
+            try
+            {
+                user = await this.usersService.GetUser(email);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
+
             var listItems = await this.usersService.GetAllRoles();
             SelectList selectLists = new SelectList(listItems);
 
@@ -58,7 +69,14 @@ namespace EClinic.Web.Areas.Doctor.Controllers
                 return this.Redirect("GetAllUsers");
             }
 
-            await this.usersService.EditUser(viewModel);
+            try
+            {
+                await this.usersService.EditUser(viewModel);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
             
 
             return this.Redirect("GetAllUsers");
@@ -70,14 +88,30 @@ namespace EClinic.Web.Areas.Doctor.Controllers
             {
                 return this.Redirect("GetAllUsers");
             }
-            await this.usersService.DeleteUser(email);
+
+            try
+            {
+                await this.usersService.DeleteUser(email);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
 
             return this.Redirect("GetAllUsers");
         }
 
         public async Task<IActionResult> GetUserInfo(string email)
         {
-            var user = await this.usersService.GetUser(email);
+            var user = new EditUserViewModel();
+            try
+            {
+                user = await this.usersService.GetUser(email);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
 
             var exams = await this.examService.GetAllExamForPatient(email);
 

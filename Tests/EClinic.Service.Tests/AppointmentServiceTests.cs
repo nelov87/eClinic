@@ -16,7 +16,7 @@ using Xunit;
 
 namespace EClinic.Service.Tests
 {
-    public class UnitTest1
+    public class AppointmentServiceTests
     {
         [Fact]
         public async void CreateAppointmentForUnexistingUserAndDoctorShouldThrowExeption()
@@ -162,9 +162,10 @@ namespace EClinic.Service.Tests
             //Act
             var result = await appointmentService.GetAllAppointsmentDatesForDoctorForDay(userToAdd.UserName, date);
 
+            var actual = dbContext.Appointments.Where(x => x.DoctorId == dbContext.Users.FirstOrDefault(d => d.Email == "nelov872@gmail.com").Id).ToList();
             
             //Assert
-            Assert.Equal(1, result.Count());
+            Assert.Equal(actual.Count(), result.Count());
         }
 
         [Fact]
@@ -286,8 +287,6 @@ namespace EClinic.Service.Tests
             await appointmentService.CreateAppointment("nelov87@gmail.com", "nelov872@gmail.com", date);
 
             dbContext.Appointments.Where(x => true).ToList();
-
-
 
 
             await Assert.ThrowsAsync<ArgumentException>(async () => await appointmentService.ShowLastAppointmentForUser(""));

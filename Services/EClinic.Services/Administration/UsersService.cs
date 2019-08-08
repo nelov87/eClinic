@@ -38,17 +38,22 @@ namespace EClinic.Services.Administration
 
         public async Task<EditUserViewModel> GetUser(string email)
         {
-            if (String.IsNullOrWhiteSpace(email))
+            var user = new EClinicUser();
+
+            if (String.IsNullOrEmpty(email))
             {
-                throw new NullReferenceException("email is Null");
+                throw new ArgumentException("email is Null");
             }
 
-            var user = this.db.Users.FirstOrDefault(x => x.Email == email && x.IsDeleted == false);
-
-            if (user == null)
+            try
             {
-                throw new NullReferenceException("email is Null");
+                user = this.db.Users.FirstOrDefault(x => x.Email == email && x.IsDeleted == false);
             }
+            catch (Exception e)
+            {
+                throw new ArgumentException("email is Null");
+            }
+
 
             var roles = await userManager.GetRolesAsync(user);
 
@@ -79,7 +84,16 @@ namespace EClinic.Services.Administration
 
         public async Task<bool> EditUser(EditUserViewModel viewModel)
         {
-            var user = await this.db.Users.FirstOrDefaultAsync(x => x.Email == viewModel.Email);
+            EClinicUser user = new EClinicUser();
+
+            try
+            {
+                user = this.db.Users.First(x => x.Email == viewModel.Email);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Edit user model is mising Email");
+            }
 
             if (user == null)
             {

@@ -1,14 +1,14 @@
-﻿using EClinic.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-namespace EClinic.Service.Tests
+namespace Microsoft.AspNetCore.Identity.Test
 {
     public static class MockHelpers
     {
@@ -19,18 +19,18 @@ namespace EClinic.Service.Tests
             var store = new Mock<IUserStore<TUser>>();
             var mgr = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
             mgr.Object.UserValidators.Add(new UserValidator<TUser>());
-            //mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+            mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
             return mgr;
         }
 
-        //public static Mock<RoleManager<TRole>> MockRoleManager<TRole>(IRoleStore<TRole> store = null) where TRole : class
-        //{
-        //    store = store ?? new Mock<IRoleStore<TRole>>().Object;
-        //    var roles = new List<IRoleValidator<TRole>>();
-        //    roles.Add(new RoleValidator<TRole>());
-        //    return new Mock<RoleManager<TRole>>(store, roles, new UpperInvariantLookupNormalizer(),
-        //        new IdentityErrorDescriber(), null);
-        //}
+        public static Mock<RoleManager<TRole>> MockRoleManager<TRole>(IRoleStore<TRole> store = null) where TRole : class
+        {
+            store = store ?? new Mock<IRoleStore<TRole>>().Object;
+            var roles = new List<IRoleValidator<TRole>>();
+            roles.Add(new RoleValidator<TRole>());
+            return new Mock<RoleManager<TRole>>(store, roles, new UpperInvariantLookupNormalizer(),
+                new IdentityErrorDescriber(), null);
+        }
 
         public static Mock<ILogger<T>> MockILogger<T>(StringBuilder logStore = null) where T : class
         {
@@ -82,17 +82,17 @@ namespace EClinic.Service.Tests
             return userManager;
         }
 
-        //public static RoleManager<TRole> TestRoleManager<TRole>(IRoleStore<TRole> store = null) where TRole : class
-        //{
-        //    store = store ?? new Mock<IRoleStore<TRole>>().Object;
-        //    var roles = new List<IRoleValidator<TRole>>();
-        //    roles.Add(new RoleValidator<TRole>());
-        //    return new AspNetRoleManager<TRole>(store, roles,
-        //        new UpperInvariantLookupNormalizer(),
-        //        new IdentityErrorDescriber(),
-        //        null,
-        //        null);
-        //}
+        public static RoleManager<TRole> TestRoleManager<TRole>(IRoleStore<TRole> store = null) where TRole : class
+        {
+            store = store ?? new Mock<IRoleStore<TRole>>().Object;
+            var roles = new List<IRoleValidator<TRole>>();
+            roles.Add(new RoleValidator<TRole>());
+            return new AspNetRoleManager<TRole>(store, roles,
+                new UpperInvariantLookupNormalizer(),
+                new IdentityErrorDescriber(),
+                null,
+                null);
+        }
 
     }
 }

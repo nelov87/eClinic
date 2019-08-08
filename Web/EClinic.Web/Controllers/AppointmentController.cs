@@ -88,8 +88,16 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> ShowSuccesAppointment()
         {
+            GetSuccsesAppointmentViewModel appointment = new GetSuccsesAppointmentViewModel();
+            try
+            {
+                appointment = await this.appointmentService.ShowLastAppointmentForUser(this.User.Identity.Name);
 
-            var appointment = await this.appointmentService.ShowLastAppointmentForUser(this.User.Identity.Name);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("/");
+            }
 
             return this.View(appointment);
         }
