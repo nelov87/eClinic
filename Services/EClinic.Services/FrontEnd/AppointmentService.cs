@@ -24,6 +24,7 @@ namespace EClinic.Services.FrontEnd
         {
             var appointments = this.db.Appointments.Select(x => new GetAllAppointmentFullProperties()
             {
+                Id = x.Id,
                 AppointmentDateTime = x.AppointmentDateTime,
                 CreatedOn = x.CreatedOn,
                 DoctorName = $"{this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).FirstName} {this.db.Users.FirstOrDefault(d => d.Id == x.DoctorId).LastName}",

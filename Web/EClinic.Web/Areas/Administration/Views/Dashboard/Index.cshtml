@@ -18,8 +18,8 @@
             <div class="col-lg-12">
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Home</a></li>
-                    <li><i class="icon_document_alt"></i>Site</li>
-                    <li><i class="fa fa-file-text-o"></i>Pages</li>
+                    <li><i class="icon_document_alt"></i>Index</li>
+                    <li><i class="fa fa-file-text-o"></i>All Appointments</li>
                 </ol>
             </div>
         </div>
@@ -53,8 +53,8 @@
 
                             <td>
                                 <div class="btn-group">
-                                    <a asp-area="Administration" asp-controller="Site" asp-action="EditPage" asp-route-id="@appointment.Id" class="btn btn-primary"><i class="icon_pencil-edit_alt"></i></a>
-                                    <a class="btn btn-danger" asp-action="DeletePage" asp-route-id="@appointment.Id"><i class="icon_close_alt2"></i></a>
+                                    <a asp-controller="Appointment" asp-action="GetSingelAppointment" asp-route-id="@appointment.Id" class="btn btn-info"><i class="icon_info"></i></a>
+                                    <a class="btn btn-danger" asp-controller="Appointment" asp-action="DeleteAppointment" asp-route-id="@appointment.Id"><i class="icon_close_alt2"></i></a>
                                 </div>
                             </td>
                         </tr>
