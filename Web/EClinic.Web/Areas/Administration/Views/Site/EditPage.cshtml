@@ -4,6 +4,16 @@
 }
 @{
     var pageViewModel = (EClinic.Web.ViewModels.Site.PageViewModel)ViewData["Page"];
+    var imageHolder = "";
+
+    if (string.IsNullOrWhiteSpace(pageViewModel.ImageUrl))
+    {
+        imageHolder = "No Image";
+    }
+    else
+    {
+        imageHolder = $"<img style=\"width:20%\" src=\"{@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(pageViewModel.ImageUrl))}\" />";
+    }
 }
 <section id="main-content">
     <section class="wrapper">
@@ -25,7 +35,7 @@
                         Form Elements
                     </header>
                     <div class="panel-body">
-                        <form enctype="multipart/form-data" class="form-horizontal" asp-action="EditPage" method="post" id="page-details" >
+                        <form enctype="multipart/form-data" class="form-horizontal" asp-action="EditPage" method="post" id="page-details">
                             @*@Html.AntiForgeryToken()*@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">@Html.DisplayNameFor(model => model.Title):</label>
@@ -36,20 +46,18 @@
                             </div>
                             <input type="hidden" asp-for="Id" class="form-control" form="page-details" value="@pageViewModel.Id">
 
-                            @*<div class="form-group">
-         <div id="editor" class="btn-toolbar" data-role="editor-toolbar" data-target="#editor"></div>
-         <label class="col-sm-2 control-label">@Html.DisplayNameFor(model => model.Content):</label>
-         <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Curent Image:</label>
+                                <div class="col-sm-10">
+                                    
+                                    @Html.Raw(imageHolder)
+                                    
+                                </div>
+                            </div>
 
-             <input type="text" class="form-control" value="@Model.Content">
-              <span asp-validation-for="@Model.Content" class="text-danger"></span>
-           </div>
-        </div>*@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Image Url:</label>
                                 <div class="col-sm-10">
-                                    <label class="col-sm-2 control-label">Curent Image:</label>
-                                    <img style="width:20%" src="@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(pageViewModel.ImageUrl))" />
                                     
                                     <input type="file" asp-for="ImageUrl" class="form-control-file" value="@pageViewModel.ImageUrl">
                                     <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>

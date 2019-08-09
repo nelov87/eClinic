@@ -17,6 +17,9 @@ namespace EClinic.Services.Administration
         Task<bool> EditUser(EditUserViewModel viewModel);
 
         Task<bool> DeleteUser(string email);
-        
+
+        Task<List<UserViewModel>> SearchForUser(string username);
+
+
     }
 }

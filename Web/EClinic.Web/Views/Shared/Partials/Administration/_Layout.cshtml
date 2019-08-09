@@ -67,8 +67,8 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">
                     <li>
-                        <form class="navbar-form">
-                            <input class="form-control" placeholder="Search" type="text">
+                        <form class="navbar-form" asp-area="Doctor" asp-controller="Users" asp-action="SerchUser" method="get">
+                            <input class="form-control" name="username" placeholder="Search" type="text">
                         </form>
                     </li>
                 </ul>

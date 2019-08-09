@@ -172,5 +172,12 @@ namespace EClinic.Services.Administration
 
             return true;
         }
+
+        public async Task<List<UserViewModel>> SearchForUser(string username)
+        {
+            var users = this.db.Users.Where(u => u.UserName.Contains(username)).To<UserViewModel>().ToList();
+
+            return users;
+        }
     }
 }

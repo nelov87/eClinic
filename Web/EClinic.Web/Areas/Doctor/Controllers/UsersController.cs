@@ -129,5 +129,23 @@ namespace EClinic.Web.Areas.Doctor.Controllers
 
             return this.View(user);
         }
+
+        public async Task<IActionResult> SerchUser(string username)
+        {
+            var users = new List<UserViewModel>();
+
+            try
+            {
+                users = await this.usersService.SearchForUser(username);
+
+                
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
+
+            return View(users);
+        }
     }
 }
