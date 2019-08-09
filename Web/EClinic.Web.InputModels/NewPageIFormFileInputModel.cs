@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EClinic.Services.Mapping;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace EClinic.Web.InputModels
 {
-    public class NewPageInputModel
+    public class NewPageIFormFileInputModel : IMapFrom<NewPageInputModel>
     {
         [Required]
         [MinLength(5, ErrorMessage = "Minimum lenght of Title is 3 charecters!")]
@@ -18,6 +19,6 @@ namespace EClinic.Web.InputModels
         [MaxLength(2000, ErrorMessage = "Maximum lenght of Content is 2000 charecters!")]
         public string Content { get; set; }
 
-        public string ImageUrl { get; set; }
+        public IFormFile ImageUrl { get; set; }
     }
 }

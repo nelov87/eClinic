@@ -37,8 +37,24 @@ namespace EClinic.Services.Administration
             return doctors;
         }
 
-        
+        public async Task<bool> IsDoctor(string username)
+        {
+            var isInRoleDoctor = false;
 
-        
+            try
+            {
+                var user = await this.db.Users.FirstOrDefaultAsync(d => d.UserName == username);
+                isInRoleDoctor = await this.userManager.IsInRoleAsync(user, GlobalConstants.DoctorRoleName);
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+
+
+            return isInRoleDoctor;
+        }
+
+
     }
 }

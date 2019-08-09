@@ -12,5 +12,11 @@ namespace EClinic.Services
         IEnumerable<SetingViewModel> GetAll();
 
         void EditSeting(int id, string value);
+
+        string GetSiteName();
+
+        string GetTelefon();
+
+        string GetEmail();
     }
 }

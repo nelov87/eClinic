@@ -6,8 +6,10 @@ using System.Text;
 
 namespace EClinic.Web.InputModels
 {
-    public class NewPageInputModel
+    public class EditPageIFormFileInputModel
     {
+        public string Id { get; set; }
+
         [Required]
         [MinLength(5, ErrorMessage = "Minimum lenght of Title is 3 charecters!")]
         [MaxLength(200, ErrorMessage = "Maximum lenght of Title is 20 charecters!")]
@@ -18,6 +20,6 @@ namespace EClinic.Web.InputModels
         [MaxLength(2000, ErrorMessage = "Maximum lenght of Content is 2000 charecters!")]
         public string Content { get; set; }
 
-        public string ImageUrl { get; set; }
+        public IFormFile ImageUrl { get; set; }
     }
 }

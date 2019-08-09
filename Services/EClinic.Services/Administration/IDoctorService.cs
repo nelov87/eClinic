@@ -9,5 +9,7 @@ namespace EClinic.Services.Administration
     public interface IDoctorService
     {
         Task<ICollection<DoctorNameAndUserNameViewModel>> GetAllDoctorsNames();
+
+        Task<bool> IsDoctor(string username);
     }
 }
