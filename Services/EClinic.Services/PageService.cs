@@ -49,7 +49,7 @@ namespace EClinic.Services
             return this.db.SitePages.To<PageViewModel>().FirstOrDefault(x => x.Id == id);
         }
 
-        public async Task<bool> AddPage(PageInputModel pageInput)
+        public async Task<bool> AddPage(NewPageInputModel pageInput)
         {
             var page = new SitePages();
             page.Title = pageInput.Title;
@@ -57,7 +57,14 @@ namespace EClinic.Services
             page.ImageUrl = pageInput.ImageUrl;
             page.CreatedOn = DateTime.UtcNow;
 
-            await this.db.SitePages.AddAsync(page);
+            try
+            {
+                await this.db.SitePages.AddAsync(page);
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NullReferenceException("Add Page Needs a valid page model.");
+            }
 
             int result = await this.db.SaveChangesAsync();
 
@@ -70,8 +77,15 @@ namespace EClinic.Services
 
         public async Task<bool> DeletePage(string id)
         {
-            
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentException("Delete page requires valid id.");
+            }
+
+
             var page = this.db.SitePages.FirstOrDefault(x => x.Id == id);
+
+            //TODO try catch ??? 
             this.db.SitePages.Remove(page);
 
             int result = await this.db.SaveChangesAsync();

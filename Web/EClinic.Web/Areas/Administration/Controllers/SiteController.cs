@@ -35,15 +35,15 @@ namespace EClinic.Web.Areas.Administration.Controllers
             return this.View(pages);
         }
 
-        public async Task<IActionResult> IndexPageSlidesAll()
-        {
-            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                return this.Redirect("/");
-            }
+        //public async Task<IActionResult> IndexPageSlidesAll()
+        //{
+        //    if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        //    {
+        //        return this.Redirect("/");
+        //    }
 
-            return View();
-        }
+        //    return View();
+        //}
 
         [HttpGet]
         public async Task<IActionResult> EditPage(string id)
@@ -66,7 +66,19 @@ namespace EClinic.Web.Areas.Administration.Controllers
                 return this.Redirect("/");
             }
 
-            await this.pageService.EditPage(pageInput);
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect($"~/Administration/Site/GetAllPages");
+            }
+
+            try
+            {
+                await this.pageService.EditPage(pageInput);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("~/Administration/Site/GetAllPages");
+            }
 
             return this.Redirect("~/Administration/Site/GetAllPages");
         }
@@ -83,14 +95,26 @@ namespace EClinic.Web.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPage(PageInputModel pageInput)
+        public async Task<IActionResult> AddPage(NewPageInputModel pageInput)
         {
             if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
                 return this.Redirect("/");
             }
 
-            await this.pageService.AddPage(pageInput);
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(pageInput);
+            }
+
+            try
+            {
+                await this.pageService.AddPage(pageInput);
+            }
+            catch (Exception e)
+            {
+                return this.View(pageInput);
+            }
 
             return this.Redirect("~/Administration/Site/GetAllPages");
         }
@@ -103,32 +127,40 @@ namespace EClinic.Web.Areas.Administration.Controllers
                 return this.Redirect("/");
             }
 
-            await this.pageService.DeletePage(id);
+            try
+            {
+                await this.pageService.DeletePage(id);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("~/Administration/Site/GetAllPages");
+            }
+            
 
             return this.Redirect("~/Administration/Site/GetAllPages");
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EditSlide(int id)
-        {
-            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                return this.Redirect("/");
-            }
+        //[HttpGet]
+        //public async Task<IActionResult> EditSlide(int id)
+        //{
+        //    if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        //    {
+        //        return this.Redirect("/");
+        //    }
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
 
-        [HttpPost]
-        public async Task<IActionResult> EditSlide()
-        {
-            if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-            {
-                return this.Redirect("/");
-            }
+        //[HttpPost]
+        //public async Task<IActionResult> EditSlide()
+        //{
+        //    if (!this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        //    {
+        //        return this.Redirect("/");
+        //    }
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
 
         public async Task<IActionResult> Setings()
         {
@@ -157,7 +189,14 @@ namespace EClinic.Web.Areas.Administration.Controllers
                 return this.Redirect("Setings");
             }
 
-            this.settingsService.EditSeting(setingsInputModel.Id, setingsInputModel.Value);
+            try
+            {
+                this.settingsService.EditSeting(setingsInputModel.Id, setingsInputModel.Value);
+            }
+            catch (Exception e)
+            {
+                return this.View(setingsInputModel);
+            }
 
             return this.Redirect("~/Administration/Site/Setings/");
         }

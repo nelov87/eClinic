@@ -13,7 +13,7 @@ namespace EClinic.Services.Exams
 
         Task<bool> CreateExam(CreateExamInputModel examInputModel);
 
-        Task<ICollection<SingelExamViewModel>> GetAllExamsForDoctor(string doctorUsername);
+        //Task<ICollection<SingelExamViewModel>> GetAllExamsForDoctor(string doctorUsername);
 
         Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName);
 

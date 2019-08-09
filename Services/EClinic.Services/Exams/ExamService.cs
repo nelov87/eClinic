@@ -22,18 +22,33 @@ namespace EClinic.Services.Exams
 
         public async Task<bool> CreateExam(CreateExamInputModel examInputModel)
         {
-            
-            var examdb = new Exam()
+            try
             {
-                Condition = examInputModel.Condition,
-                Date = DateTime.UtcNow,
-                Diagnose = examInputModel.Diagnose,
-                DoctorId = this.db.Users.FirstOrDefault(d => d.UserName == examInputModel.DoctorUserName).Id,
-                PatientId = this.db.Users.FirstOrDefault(p => p.UserName == examInputModel.PatientUserName).Id,
-                Prescription = examInputModel.Prescription
-            };
+                if (String.IsNullOrWhiteSpace(examInputModel.Condition) 
+                    || String.IsNullOrWhiteSpace(examInputModel.Diagnose)
+                    || String.IsNullOrWhiteSpace(examInputModel.Prescription))
+                {
+                    throw new NullReferenceException("Condition, Doagnose, Prescription should be valid values.");
+                }
 
-            this.db.Exams.Add(examdb);
+
+                var examdb = new Exam()
+                {
+                    Condition = examInputModel.Condition,
+                    Date = DateTime.UtcNow,
+                    Diagnose = examInputModel.Diagnose,
+                    DoctorId = this.db.Users.FirstOrDefault(d => d.UserName == examInputModel.DoctorUserName).Id,
+                    PatientId = this.db.Users.FirstOrDefault(p => p.UserName == examInputModel.PatientUserName).Id,
+                    Prescription = examInputModel.Prescription
+                };
+
+                
+                this.db.Exams.Add(examdb);
+            }
+            catch (NullReferenceException e)
+            {
+                return false;
+            }
 
             int result = this.db.SaveChanges();
 
@@ -47,8 +62,19 @@ namespace EClinic.Services.Exams
 
         public async Task<bool> DeleteExam(string examId)
         {
-            
-            this.db.Exams.Remove(this.db.Exams.FirstOrDefault(x => x.Id == examId));
+            if (String.IsNullOrWhiteSpace(examId))
+            {
+                throw new NullReferenceException("DeleteExam requires id.");
+            }
+
+            try
+            {
+                this.db.Exams.Remove(this.db.Exams.FirstOrDefault(x => x.Id == examId));
+            }
+            catch (Exception e)
+            {
+                throw new NullReferenceException("There was an error while deleting exam" );
+            }
 
             int result = this.db.SaveChanges();
 
@@ -62,9 +88,17 @@ namespace EClinic.Services.Exams
 
         public async Task<ICollection<SingelExamViewModel>> GetAllExamForPatient(string patientUserName)
         {
-            
+            var patientId = "";
 
-            var patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUserName).Id;
+            try
+            {
+                patientId = this.db.Users.FirstOrDefault(x => x.UserName == patientUserName).Id;
+            }
+            catch (NullReferenceException e)
+            {
+                throw new NullReferenceException("GetAllExamForPatient requires patientUserName to be not null or white space.");
+
+            }
 
             var exams = this.db.Exams
                 .Where(e => e.PatientId == patientId)
@@ -83,13 +117,18 @@ namespace EClinic.Services.Exams
             return exams;
         }
 
-        public Task<ICollection<SingelExamViewModel>> GetAllExamsForDoctor(string doctorUsername)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<ICollection<SingelExamViewModel>> GetAllExamsForDoctor(string doctorUsername)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public async Task<SingelExamViewModel> GetSingelExam(string examId)
         {
+            if (String.IsNullOrWhiteSpace(examId))
+            {
+                throw new NullReferenceException("GetSingelExam requires exam Id to be not null ot white space.");
+            }
+
             var exam = this.db.Exams
                 .To<SingelExamViewModel>()
                 .FirstOrDefault(e => e.Id == examId);
@@ -100,7 +139,21 @@ namespace EClinic.Services.Exams
 
         public async Task<bool> EditExam(ExamEditInputModel inputModel)
         {
-            var examDb = this.db.Exams.FirstOrDefault(x => x.Id == inputModel.Id);
+            var examDb = new Exam();
+
+            if (String.IsNullOrWhiteSpace(inputModel.Id))
+            {
+                throw new NullReferenceException("Id must not be null or whitespace");
+            }
+
+            try
+            {
+                examDb = this.db.Exams.FirstOrDefault(x => x.Id == inputModel.Id);
+            }
+            catch (Exception e)
+            {
+                throw new NullReferenceException("There was an error in EditExam");
+            }
 
             examDb.Condition = inputModel.Condition;
             examDb.Diagnose = inputModel.Diagnose;

@@ -15,7 +15,7 @@ namespace EClinic.Services
 
         Task<bool> EditPage(PageInputModel pageInput);
 
-        Task<bool> AddPage(PageInputModel pageInput);
+        Task<bool> AddPage(NewPageInputModel pageInput);
 
         Task<bool> DeletePage(string id);
     }

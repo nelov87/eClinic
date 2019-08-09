@@ -22,26 +22,42 @@ namespace EClinic.Web.Areas.Doctor.Controllers
         public async Task<IActionResult> CreateExam(string email)
         {
             this.ViewData["PatientUserName"] = email;
+            //this.ViewData["ExamToReturn"] = new CreateExamInputModel();
 
-            return View();
+            return View(new CreateExamInputModel());
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateExam(CreateExamInputModel examInputModel)
         {
+            
             if (!this.ModelState.IsValid)
             {
-                return Redirect("CreateExam");
+                return this.View(examInputModel);
             }
 
-            await this.examService.CreateExam(examInputModel);
+            try
+            {
+                await this.examService.CreateExam(examInputModel);
+            }
+            catch (NullReferenceException e)
+            {
+                return this.View(examInputModel);
+            }
 
             return Redirect("~/Doctor/Users/GetAllUsers");
         }
 
         public async Task<IActionResult> DeleteExam(string examId)
         {
-            await this.examService.DeleteExam(examId);
+            try
+            {
+                await this.examService.DeleteExam(examId);
+            }
+            catch (NullReferenceException e)
+            {
+                return this.Redirect("~/Doctor/Users/GetAllUsers");
+            }
 
             return this.Redirect("~/Doctor/Users/GetAllUsers");
         }
@@ -49,7 +65,15 @@ namespace EClinic.Web.Areas.Doctor.Controllers
         [HttpGet]
         public async Task<IActionResult> EditExam(string examId)
         {
-            var exam = await this.examService.GetSingelExam(examId);
+            var exam = new SingelExamViewModel();
+            try
+            {
+                exam = await this.examService.GetSingelExam(examId);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("~/Doctor/Users/GetAllUsers");
+            }
 
             this.ViewData["Exam"] = exam;
 
@@ -66,12 +90,19 @@ namespace EClinic.Web.Areas.Doctor.Controllers
         [HttpPost]
         public async Task<IActionResult> EditExam(ExamEditInputModel model)
         {
-            //if (!this.ModelState.IsValid)
-            //{
-            //    return this.Redirect("~/Doctor/Users/GetAllUsers");
-            //}
+            if (!this.ModelState.IsValid)
+            {
+                return this.Redirect("~/Doctor/Users/GetAllUsers");
+            }
 
-            await this.examService.EditExam(model);
+            try
+            {
+                await this.examService.EditExam(model);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("~/Doctor/Users/GetAllUsers");
+            }
 
             return this.Redirect("~/Doctor/Users/GetAllUsers");
         }

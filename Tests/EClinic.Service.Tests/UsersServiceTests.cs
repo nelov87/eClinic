@@ -182,7 +182,6 @@ namespace EClinic.Service.Tests
             await Assert.ThrowsAsync<ArgumentException>(async () => await usersService.EditUser(user));
         }
 
-
         [Fact]
         public async void DeleteUserShoulThrowExeption()
         {

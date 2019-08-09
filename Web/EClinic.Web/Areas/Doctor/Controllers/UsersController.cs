@@ -6,6 +6,7 @@ using EClinic.Common;
 using EClinic.Services.Administration;
 using EClinic.Services.Exams;
 using EClinic.Web.ViewModels.Administration;
+using EClinic.Web.ViewModels.Exams;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -113,7 +114,16 @@ namespace EClinic.Web.Areas.Doctor.Controllers
                 return this.Redirect("GetAllUsers");
             }
 
-            var exams = await this.examService.GetAllExamForPatient(email);
+            ICollection<SingelExamViewModel> exams = new List<SingelExamViewModel>();
+
+            try
+            {
+                exams = await this.examService.GetAllExamForPatient(email);
+            }
+            catch (NullReferenceException e)
+            {
+                return this.Redirect("GetAllUsers");
+            }
 
             user.Exams = exams;
 
