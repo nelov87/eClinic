@@ -94,5 +94,6 @@ namespace EClinic.Controlers.Tests
             // Assert
             Assert.IsType<RedirectResult>(result);
         }
+
     }
 }

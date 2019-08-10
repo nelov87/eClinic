@@ -57,7 +57,14 @@ namespace EClinic.Web.Areas.Administration.Controllers
                 return this.Redirect("/");
             }
 
-            this.ViewData["Page"] = await this.pageService.GetPage(id);
+            try
+            {
+                this.ViewData["Page"] = await this.pageService.GetPage(id);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("/");
+            }
 
             return this.View();
         }

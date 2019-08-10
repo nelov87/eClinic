@@ -148,8 +148,15 @@ namespace EClinic.Web.Controllers
             {
                 return Redirect("~/Doctor/DoctorDashboard/Index");
             }
-
-            var appointment = await this.appointmentService.ShowSingelAppointment(id);
+            DoctorGetAllAppointmentsFullViewModel appointment = new DoctorGetAllAppointmentsFullViewModel();
+            try
+            {
+                appointment = await this.appointmentService.ShowSingelAppointment(id);
+            }
+            catch (Exception e)
+            {
+                return this.Redirect("/");
+            }
 
             return this.View(appointment);
         }
@@ -165,7 +172,14 @@ namespace EClinic.Web.Controllers
                     return Redirect("~/Administration/Dashboard/Index");
                 }
 
-                await this.appointmentService.DeleteAppointment(id);
+                try
+                {
+                    await this.appointmentService.DeleteAppointment(id);
+                }
+                catch (Exception e)
+                {
+                    return this.Redirect("/");
+                }
 
                 return Redirect("~/Administration/Dashboard/Index");
             }
@@ -177,7 +191,14 @@ namespace EClinic.Web.Controllers
                     return Redirect("~/Doctor/DoctorDashboard/Index");
                 }
 
-                await this.appointmentService.DeleteAppointment(id);
+                try
+                {
+                    await this.appointmentService.DeleteAppointment(id);
+                }
+                catch (Exception e)
+                {
+                    return this.Redirect("/");
+                }
 
                 return Redirect("~/Doctor/DoctorDashboard/Index");
             }
