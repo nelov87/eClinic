@@ -38,7 +38,7 @@
                                                {
                                                    @if (hour > DateTime.UtcNow.Hour)
                                                     {
-                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Month"]}/{ViewData["Day"]}/{DateTime.Now.Year} {hour}:{minuts}", CultureInfo.InvariantCulture)">Book Appointment</a></td>
                                                     }
                                                     else
                                                     {
@@ -47,7 +47,7 @@
                                                }
                                                else
                                                {
-                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Month"]}/{ViewData["Day"]}/{DateTime.Now.Year} {hour}:{minuts}", CultureInfo.InvariantCulture)">Book Appointment</a></td>
 
                                                }
                                            }

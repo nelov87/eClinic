@@ -106,29 +106,7 @@ namespace EClinic.Web
                 new SiteDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
-            //using (var serviceScope = app.ApplicationServices.CreateScope())
-            //{
-            //    using (var context = serviceScope.ServiceProvider.GetRequiredService<EClinicDbContext>())
-            //    {
-            //        context.Database.EnsureCreated();
-            //        if (!context.Roles.Any())
-            //        {
-            //            context.Roles.Add(new IdentityRole
-            //            {
-            //                Name = GlobalConstants.AdministratorRoleName,
-            //                NormalizedName = GlobalConstants.AdministratorRoleName.ToUpper()
-            //            });
-
-            //            context.Roles.Add(new IdentityRole
-            //            {
-            //                Name = GlobalConstants.UserRoleName,
-            //                NormalizedName = GlobalConstants.UserRoleName.ToUpper()
-            //            }); ;
-
-            //            context.SaveChanges();
-            //        }
-            //    } 
-            //}
+            
 
                 if (env.IsDevelopment())
                 {

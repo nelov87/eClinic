@@ -34,10 +34,10 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            this.ViewData["MenuItems"] = this.menuService.GetAll();
-            this.ViewData["SiteName"] = this.settingsService.GetSiteName();
-            this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
-            this.ViewData["Email"] = this.settingsService.GetTelefon();
+            
+            //this.ViewData["SiteName"] = this.settingsService.GetSiteName();
+            //this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
+            //this.ViewData["Email"] = this.settingsService.GetTelefon();
 
             var doctors = await this.doctorService.GetAllDoctorsNames();
 
@@ -46,10 +46,10 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> ShowMonth(string userName)
         {
-            this.ViewData["MenuItems"] = this.menuService.GetAll();
-            this.ViewData["SiteName"] = this.settingsService.GetSiteName();
-            this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
-            this.ViewData["Email"] = this.settingsService.GetTelefon();
+            
+            //this.ViewData["SiteName"] = this.settingsService.GetSiteName();
+            //this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
+            //this.ViewData["Email"] = this.settingsService.GetTelefon();
 
 
             if (!await this.doctorService.IsDoctor(userName))
@@ -68,16 +68,14 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> ShowDay(int day, int month, string doctorUsername)
         {
-            this.ViewData["MenuItems"] = this.menuService.GetAll();
-            this.ViewData["SiteName"] = this.settingsService.GetSiteName();
-            this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
-            this.ViewData["Email"] = this.settingsService.GetTelefon();
+            
+            
 
             this.ViewData["Doctor"] = doctorUsername;
             this.ViewData["Day"] = day;
             this.ViewData["Month"] = month;
 
-            var dateOfApointment = new DateTime(DateTime.UtcNow.Year, month, day);
+            var dateOfApointment = new DateTime(year: DateTime.UtcNow.Year, month: month, day: day);
 
             ICollection<AppointmentGetAllForDayViewModel> appointments = new List<AppointmentGetAllForDayViewModel>();
 
@@ -96,10 +94,10 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> CreateAppointment(string userName, string doctorUsername, DateTime date)
         {
-            this.ViewData["MenuItems"] = this.menuService.GetAll();
-            this.ViewData["SiteName"] = this.settingsService.GetSiteName();
-            this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
-            this.ViewData["Email"] = this.settingsService.GetTelefon();
+            
+            //this.ViewData["SiteName"] = this.settingsService.GetSiteName();
+            //this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
+            //this.ViewData["Email"] = this.settingsService.GetTelefon();
 
             //{ 01 - Jan - 01 12:00:00 AM}
             if (date == DateTime.MinValue )
@@ -123,10 +121,10 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> ShowSuccesAppointment()
         {
-            this.ViewData["MenuItems"] = this.menuService.GetAll();
-            this.ViewData["SiteName"] = this.settingsService.GetSiteName();
-            this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
-            this.ViewData["Email"] = this.settingsService.GetTelefon();
+            
+            //this.ViewData["SiteName"] = this.settingsService.GetSiteName();
+            //this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
+            //this.ViewData["Email"] = this.settingsService.GetTelefon();
 
             GetSuccsesAppointmentViewModel appointment = new GetSuccsesAppointmentViewModel();
             try

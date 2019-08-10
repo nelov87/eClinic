@@ -1,0 +1,56 @@
+﻿
+@model ICollection<EClinic.Web.ViewModels.Site.MenuViewModel>
+
+    
+
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 left-item">
+                        <ul>
+                            <li><i class="fas fa-envelope-square"></i>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(this.ViewData["Email"].ToString())) </li>
+                            <li><i class="fas fa-phone-square"></i> @Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(this.ViewData["PhoneNumber"].ToString()))</li>
+
+                        </ul>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block right-item" style="display:inline !important;">
+                        <ul>
+                            <li><a><i class="fab fa-github"></i></a></li>
+                            <li><a><i class="fab fa-google-plus-g"></i></a></li>
+                            <li> <a><i class="fab fa-pinterest-p"></i></a></li>
+                            <li><a><i class="fab fa-twitter"></i></a></li>
+                            <li> <a><i class="fab fa-facebook-f"></i></a></li>
+                            <partial name="Partials/_LoginPartial" />
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="nav-head" class="header-nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-3 no-padding col-sm-12 nav-img">
+                        <h1 style="color:steelblue; vertical-align:baseline; margin-bottom:0;">@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(this.ViewData["SiteName"].ToString()))</h1>
+                        <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-md-none small-menu fa-bars"></i></a>
+                    </div>
+                    <div id="menu" class="col-lg-8 col-md-9 d-none d-md-block nav-item">
+                        <ul>
+                            <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+
+                            @foreach (var item in Model)
+                            {
+                                <li><a asp-controller="Home" asp-action="GetPage" asp-route-id="@item.Id">@item.Title</a></li>
+                            }
+                            <li><a href="https://eclinicnelov.azurewebsites.net/">Live preview</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2 d-none d-lg-block appoint">
+                        <a class="btn btn-info" asp-controller="Appointment" asp-action="Index">Book an Appointment</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
