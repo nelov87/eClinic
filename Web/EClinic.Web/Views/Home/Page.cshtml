@@ -5,13 +5,12 @@
 
 @model EClinic.Web.ViewModels.Site.PageViewModel
 
-
 <!--  ************************* Page Title Starts Here ************************** -->
 <div class="page-nav no-margin row">
     <div class="container">
         <div class="row">
             <h2>@Html.Raw(Microsoft.Security.Application.Sanitizer.GetSafeHtmlFragment(@Model.Title))</h2>
-            
+
         </div>
     </div>
 </div>

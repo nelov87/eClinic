@@ -46,7 +46,14 @@ namespace EClinic.Services
 
         public async Task<PageViewModel> GetPage(string id)
         {
-            return this.db.SitePages.To<PageViewModel>().FirstOrDefault(x => x.Id == id);
+            PageViewModel page = this.db.SitePages.To<PageViewModel>().FirstOrDefault(x => x.Id == id);
+
+            if (page == null)
+            {
+                throw new Exception("No page whit that id");
+            }
+
+            return page;
         }
 
         public async Task<bool> AddPage(NewPageInputModel pageInput)

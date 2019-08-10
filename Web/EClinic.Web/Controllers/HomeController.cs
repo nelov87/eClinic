@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using EClinic.Web.Models;
 using EClinic.Services.FrontEnd;
 using EClinic.Services;
+using EClinic.Web.ViewModels.Site;
 
 namespace EClinic.Web.Controllers
 {
@@ -40,7 +41,20 @@ namespace EClinic.Web.Controllers
             this.ViewData["PhoneNumber"] = this.settingsService.GetTelefon();
             this.ViewData["Email"] = this.settingsService.GetTelefon();
 
-            var content = await this.pageService.GetPage(id);
+            PageViewModel content = new PageViewModel();
+
+            try
+            {
+                content = await this.pageService.GetPage(id);
+            }
+            catch (Exception e)
+            {
+                
+
+                return this.Redirect("/");
+            }
+
+
             return this.View("../Home/Page", content);
         }
 
