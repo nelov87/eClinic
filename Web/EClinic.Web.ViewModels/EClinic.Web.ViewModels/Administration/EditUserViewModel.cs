@@ -60,5 +60,7 @@ namespace EClinic.Web.ViewModels.Administration
         [DisplayName("User Roles")]
         public ICollection<string> UserRoles { get; set; }
 
+        public string ImageUrl { get; set; }
+
     }
 }

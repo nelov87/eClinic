@@ -31,7 +31,8 @@ namespace EClinic.Services.Administration
             var doctors = doctorsDb.Select(d => new DoctorNameAndUserNameViewModel()
             {
                 UserName = d.UserName,
-                Name = $"{d.FirstName} {d.LastName}"
+                Name = $"{d.FirstName} {d.LastName}",
+                ImageUrl = d.ImageUrl
             }).ToList();
 
             return doctors;

@@ -19,47 +19,76 @@
                 </thead>
                 <tbody>
 
-                    @for (int hour = 7; hour <= 19; hour++)
-                    {
-                        @for (int i = 1; i <= 2; i++)
-                        {
+                     @for (int hour = 7; hour <= 19; hour++)
+                      {
+                          @for (int i = 1; i <= 2; i++)
+                          {
 
-                            if (minuts == 0)
-                            {
+                              if (minuts == 0)
+                              {
                                 <tr>
-                                    <th scope="row">@hour:@($"{minuts:d2}")</th>
-                                    @if (Model.Any(x => $"{x.AppointmentDateTime.Hour}:{x.AppointmentDateTime.Minute:d2}" == $"{hour}:{minuts:d2}"))
-                                    {
-                                        <td>Taken</td>
-                                    }
-                                    else
-                                    {
-                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
-                                    }
-                                    
-                                    @{minuts = 30;}
+                                     <th scope="row">@hour:@($"{minuts:d2}")</th>
+                                         @if (Model.Any(x => $"{x.AppointmentDateTime.Hour}:{x.AppointmentDateTime.Minute:d2}" == $"{hour}:{minuts:d2}"))
+                                          {
+                                               <td>Taken</td>
+                                          }
+                                          else
+                                          {
+                                               @if ((int)this.ViewData["Day"] == DateTime.UtcNow.Day)
+                                               {
+                                                   @if (hour > DateTime.UtcNow.Hour)
+                                                    {
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Not available</td>
+                                                    }
+                                               }
+                                               else
+                                               {
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+
+                                               }
+                                           }
+
+                                           @{minuts = 30;}
                                 </tr>
-                            }
-                            else
-                            {
+                              }
+                              else
+                              {
                                 <tr>
-                                    <th scope="row">@hour:@($"{minuts:d2}")</th>
-                                    @if (Model.Any(x => $"{x.AppointmentDateTime.Hour}:{x.AppointmentDateTime.Minute:d2}" == $"{hour}:{minuts:d2}"))
-                                    {
-                                        <td>Taken</td>
-                                    }
-                                    else
-                                    {
-                                        <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">reg</a></td>
-                                    }
-                                    
-                                    @{minuts = 30;}
-                                    @{minuts = 0;
-                                    }
+                                     <th scope="row">@hour:@($"{minuts:d2}")</th>
+                                        @if (Model.Any(x => $"{x.AppointmentDateTime.Hour}:{x.AppointmentDateTime.Minute:d2}" == $"{hour}:{minuts:d2}"))
+                                         {
+                                            <td>Taken</td>
+                                         }
+                                         else
+                                         {
+                                              @if ((int)this.ViewData["day"] == DateTime.UtcNow.Day)
+                                               {
+                                                   @if (hour > DateTime.UtcNow.Hour)
+                                                    {
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Not available</td>
+                                                    }
+                                               }
+                                               else
+                                               {
+                                                         <td><a class="btn btn-sm btn-info text-white" asp-controller="Appointment" asp-action="CreateAppointment" asp-route-userName="@this.User.Identity.Name" asp-route-doctorUsername="@ViewData["Doctor"]" asp-route-date="@DateTime.Parse($"{ViewData["Day"]}/{ViewData["Month"]}/{DateTime.Now.Year} {hour}:{minuts}")">Book Appointment</a></td>
+
+                                               }
+                                         }
+
+                                         @{minuts = 30;}
+                                         @{minuts = 0;}
                                 </tr>
-                            }
-                        }
-                    }
+                              }
+                          }
+                      }
                     </tbody>
                 </table>
         </div>

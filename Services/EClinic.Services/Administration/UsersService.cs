@@ -9,6 +9,7 @@ using EClinic.Data.Models;
 using EClinic.Services.Exams;
 using EClinic.Services.Mapping;
 using EClinic.Web.ViewModels.Administration;
+using EClinic.Web.ViewModels.Patient;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -140,6 +141,44 @@ namespace EClinic.Services.Administration
             return false;
         }
 
+        public async Task<bool> EditPatient(EditPatientViewModel viewModel)
+        {
+            EClinicUser user = new EClinicUser();
+
+            try
+            {
+                user = this.db.Users.First(x => x.Email == viewModel.Email);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("Edit user model is mising Email");
+            }
+
+            if (user == null)
+            {
+                return false;
+            }
+
+
+            user.FirstName = viewModel.FirstName;
+            user.MiddleName = viewModel.MiddleName;
+            user.LastName = viewModel.LastName;
+            user.Address = viewModel.Address;
+            user.Age = viewModel.Age;
+            user.ModifiedOn = DateTime.UtcNow;
+            user.ImageUrl = viewModel.ImageUrl; ;
+
+
+            var changesCount = this.db.SaveChanges();
+
+            if (changesCount > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<bool> DeleteUser(string email)
         {
             var user = new EClinicUser();
@@ -178,6 +217,49 @@ namespace EClinic.Services.Administration
             var users = this.db.Users.Where(u => u.UserName.Contains(username)).To<UserViewModel>().ToList();
 
             return users;
+        }
+
+        public async Task<EditPatientViewModel> GetPatient(string email)
+        {
+            var user = new EClinicUser();
+
+            if (String.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("email is Null");
+            }
+
+            try
+            {
+                user = this.db.Users.FirstOrDefault(x => x.Email == email && x.IsDeleted == false);
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException("email is Null");
+            }
+
+            var exams = await this.examService.GetAllExamForPatient(email);
+
+            var userToReturnn = new EditPatientViewModel()
+            {
+                Address = user.Address,
+                Age = user.Age,
+                CreatedOn = user.CreatedOn,
+                FirstName = user.FirstName,
+                MiddleName = user.MiddleName,
+                LastName = user.LastName,
+                ImageUrl = user.ImageUrl,
+                Email = user.Email,
+                Exams = exams
+            };
+
+            return userToReturnn;
+        }
+
+        public async Task<string> GetUserProfilePicture(string email)
+        {
+            var img = this.db.Users.FirstOrDefault(x => x.Email == email).ImageUrl;
+
+            return img;
         }
     }
 }

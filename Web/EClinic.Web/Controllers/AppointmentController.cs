@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EClinic.Common;
 using EClinic.Services;
 using EClinic.Services.Administration;
 using EClinic.Services.FrontEnd;
@@ -155,14 +156,33 @@ namespace EClinic.Web.Controllers
 
         public async Task<IActionResult> DeleteAppointment(string id)
         {
-            if (id == null)
+
+
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
+                if (id == null)
+                {
+                    return Redirect("~/Administration/Dashboard/Index");
+                }
+
+                await this.appointmentService.DeleteAppointment(id);
+
+                return Redirect("~/Administration/Dashboard/Index");
+            }
+            else if (this.User.IsInRole(GlobalConstants.DoctorRoleName))
+            {
+                
+                if (id == null)
+                {
+                    return Redirect("~/Doctor/DoctorDashboard/Index");
+                }
+
+                await this.appointmentService.DeleteAppointment(id);
+
                 return Redirect("~/Doctor/DoctorDashboard/Index");
             }
 
-            await this.appointmentService.DeleteAppointment(id);
-
-            return Redirect("~/Doctor/DoctorDashboard/Index");
+            return this.Redirect("/");
         }
 
     }

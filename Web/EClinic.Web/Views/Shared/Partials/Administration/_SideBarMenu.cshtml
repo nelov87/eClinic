@@ -1,0 +1,56 @@
+﻿<ul class="sidebar-menu">
+    @if (this.User.IsInRole("Administrator"))
+    {
+        <li class="active">
+            <a class="" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" asp-fragment="">
+                <i class="icon_house_alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li class="sub-menu">
+            <a href="javascript:;" class="">
+                <i class="icon_document_alt"></i>
+                <span>Site</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="Setings">Site Setings</a></li>
+                @*<li><a class="" asp-area="Administration" asp-controller="Site" asp-action="IndexPageSlidesAll">Slides</a></li>*@
+                <li><a class="" asp-area="Administration" asp-controller="Site" asp-action="GetAllPages">Pages</a></li>
+
+            </ul>
+        </li>
+    }
+    @if (this.User.IsInRole("Administrator") || this.User.IsInRole("Doctor"))
+    {
+        <li class="sub-menu">
+            <a href="javascript:;" class="">
+                <i class="icon_desktop"></i>
+                <span>Users</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                <li><a class="" asp-area="Doctor" asp-controller="Users" asp-action="GetAllUsers">Get All Users</a></li>
+
+            </ul>
+        </li>
+    }
+    @if (this.User.IsInRole("Patient") && !this.User.IsInRole("Administrator") && !this.User.IsInRole("Doctor"))
+    {
+        <li class="sub-menu">
+            <a href="javascript:;" class="">
+                <i class="icon_desktop"></i>
+                <span>Patient</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+            </a>
+            <ul class="sub">
+                <li><a class="" asp-area="Patient" asp-controller="Patient" asp-action="Index">Profile</a></li>
+                <li><a class="" asp-area="Patient" asp-controller="Patient" asp-action="Index">Appointments</a></li>
+
+            </ul>
+        </li>
+    }
+
+
+
+</ul>

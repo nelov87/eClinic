@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EClinic.Data.Models\EClinic.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\EClinic.Services.Mapping\EClinic.Services.Mapping.csproj" />
+    <ProjectReference Include="..\EClinic.Web.ViewModels\EClinic.Web.ViewModels\EClinic.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

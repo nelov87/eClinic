@@ -1,0 +1,9 @@
+﻿@*@model EClinic.Web.ViewModels.ProfilePictureViewModel*@
+@if (!(this.ViewData["ProfilePicture"] == null))
+{
+    <span class="username"><img src="@this.ViewData["ProfilePicture"]" style="height:35px"/></span>
+}
+else
+{
+    <span class="username"><img src="/img/profilpicture.gif"  style="height:35px"/></span>
+}

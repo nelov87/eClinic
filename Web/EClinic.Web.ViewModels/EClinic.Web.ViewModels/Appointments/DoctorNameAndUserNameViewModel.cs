@@ -12,5 +12,8 @@ namespace EClinic.Web.ViewModels.Appointments
 
         [DisplayName("Doctor")]
         public string Name { get; set; }
+
+        [DisplayName("Image")]
+        public string ImageUrl { get; set; }
     }
 }

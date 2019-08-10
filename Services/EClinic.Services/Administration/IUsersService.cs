@@ -1,4 +1,5 @@
 ﻿using EClinic.Web.ViewModels.Administration;
+using EClinic.Web.ViewModels.Patient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,6 +20,12 @@ namespace EClinic.Services.Administration
         Task<bool> DeleteUser(string email);
 
         Task<List<UserViewModel>> SearchForUser(string username);
+
+        Task<bool> EditPatient(EditPatientViewModel viewModel);
+
+        Task<EditPatientViewModel> GetPatient(string email);
+
+        Task<string> GetUserProfilePicture(string email);
 
 
     }

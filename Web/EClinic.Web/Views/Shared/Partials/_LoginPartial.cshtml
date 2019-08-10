@@ -22,6 +22,12 @@
             <a class="btn btn-primary btn-sm text-light" asp-area="Doctor" asp-controller="DoctorDashboard" asp-action="Index" title="Admin">Admin</a>
         </li>
     }
+    else if(this.User.IsInRole(GlobalConstants.UserRoleName))
+    {
+        <li>
+            <a class="btn btn-primary btn-sm text-light" asp-area="Patient" asp-controller="Patient" asp-action="Index" title="Admin">Admin</a>
+        </li>
+    }
         <li>
             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
                 <button type="submit" class="btn btn-danger btn-sm text-light">Logout</button>

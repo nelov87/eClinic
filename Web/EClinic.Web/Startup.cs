@@ -94,6 +94,7 @@ namespace EClinic.Web
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<EClinicDbContext>();
+                dbContext.Database.Migrate();
                 dbContext.Database.EnsureCreated();
 
                 if (env.IsDevelopment())
